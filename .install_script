@@ -1,0 +1,7 @@
+rm -r ~/.bashrc ~/.vimrc ~/.tmux.conf ~/.zshrc ~/.oh-my-zsh 
+ln -s ~/.dotfiles/.bashrc ~/.bashrc
+ln -s ~/.dotfiles/.oh-my-zsh ~/.oh-my-zsh
+ln -s ~/.dotfiles/.vimrc ~/.vimrc
+ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/.zshrc ~/.zshrc
+
