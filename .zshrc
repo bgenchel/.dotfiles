@@ -9,7 +9,10 @@ ZSH_THEME="agnoster"
 
 alias cdcp='cd /Users/benjamingenchel/Documents/CleverPet'
 alias cdc='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetCloud/cleverpet-cloud'
+alias cdf='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware'
 alias cdbl='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware/cleverpet-behaviorlayer'
+alias cda='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp'
+alias cdios='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-ios-app'
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
@@ -36,7 +39,7 @@ alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -60,6 +63,8 @@ plugins=(git zsh-syntax-highlighting)
 # User configuration
 export PATH="$HOME/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
+setopt PROMPT_SUBST
+PROMPT='%{$(pwd|grep --color=always /)%${#PWD}G%} %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%#%f '
 
 source $ZSH/oh-my-zsh.sh
 

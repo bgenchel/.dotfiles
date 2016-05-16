@@ -8,6 +8,7 @@ set rtp+=~/.fzf
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
+Plug 'davidhalter/jedi-vim'
 Plug 'valloric/youcompleteme'
 Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -210,6 +211,7 @@ map gd :bd<cr>
 " ========== NERD Tree ==========
 nmap <silent> <F3> :NERDTreeTabsToggle<CR>
 map <C-n> :NERDTreeTabsToggle<CR>
+noremap <leader>n :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " ===============================
 
@@ -248,6 +250,11 @@ let g:airline_section_warning=''
 " disable bufferline/filename
 let g:airline_section_c=''
 " ==================================
+
+" ========== Jedi-Vim ==========
+let g:jedi#use_splits_not_buffers="left"
+let g:jedi#popup_select_first=0
+" ==============================
 
 " vim - notes directory
 " ========== VIM Notes ==========
@@ -342,4 +349,3 @@ vnoremap <c-]> :CtrlPtjumpVisual<cr>
 let g:ctrlp_tjump_only_silent = 1
 " don't show tag name in results as it wastes space
 let g:ctrlp_tjump_skip_tag_name = 1
-
