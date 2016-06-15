@@ -15,6 +15,7 @@ alias cda='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp'
 alias cdios='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-ios-app'
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+#PS1='%n@%m:%15<..<%~%<<%# '
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -93,3 +94,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DEFAULT_USER=benjamingenchel
+
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/benjamingenchel/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/benjamingenchel/google-cloud-sdk/completion.zsh.inc'

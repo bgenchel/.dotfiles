@@ -31,6 +31,7 @@ call plug#end()
 
 filetype indent plugin on
 syntax enable
+let pyton_highlight_all = 1
 
 set background=dark
 set t_Co=256  " 256 term coloring
@@ -207,11 +208,17 @@ map gn :bn<cr>
 map gp :bp<cr>
 map gd :bd<cr> 
 
+" block commenting in python, attempt to make language specific in the future
+map mm :norm i#<cr>
+map mk :norm ^x<cr>
+
 " ******************** PLUGINS ********************
 " ========== NERD Tree ==========
 nmap <silent> <F3> :NERDTreeTabsToggle<CR>
-map <C-n> :NERDTreeTabsToggle<CR>
-noremap <leader>n :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeTabsToggle<CR>
+" noremap <leader>n :NERDTreeToggle<CR>
+map tt :NERDTreeToggle<CR>
+noremap tt :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " ===============================
 
