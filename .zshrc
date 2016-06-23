@@ -101,3 +101,5 @@ source '/Users/benjamingenchel/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
 source '/Users/benjamingenchel/google-cloud-sdk/completion.zsh.inc'
+
+export LC_CTYPE=en_US.UTF-8

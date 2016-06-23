@@ -15,6 +15,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
@@ -213,6 +214,37 @@ map mm :norm i#<cr>
 map mk :norm ^x<cr>
 
 " ******************** PLUGINS ********************
+" ========== SYNTASTIC ==========
+map sr :SyntasticCheck<CR>
+noremap sr :SyntasticCheck<CR>
+
+map se :Errors<CR>
+noremap se :Errors<CR>
+
+map sc :lclose<CR>
+noremap sc :lclose<CR>
+
+map st :SyntasticToggleMode<CR>
+noremap st :SyntasticToggleMode<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_debug = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_enable_balloons = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+""" python
+"let g:syntastic_python_checker_args = '--disable=E228' " ignore missing whitespace around modulo operator
+"let g:syntastic_python_checker_args = '--disable=E501' " ignore line too long error
+let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291'
+"================================
+"
 " ========== NERD Tree ==========
 nmap <silent> <F3> :NERDTreeTabsToggle<CR>
 " map <C-n> :NERDTreeTabsToggle<CR>
