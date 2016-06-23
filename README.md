@@ -1,5 +1,11 @@
 # .dotfiles
 
+## Installation
+1. clone this repo into your home directory
+2. run .install_script with whatever shell you are using.
+3. open Vim, then run the command :PlugInstall
+4. quit, then reopen vim. 
+
 ###Thanks to the following for plugin, colorscheme and syntax:
 * junegunn - https://github.com/junegunn
   * vim-plug
