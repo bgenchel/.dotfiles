@@ -236,13 +236,12 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 """ python
-"let g:syntastic_python_checker_args = '--disable=E228' " ignore missing whitespace around modulo operator
-"let g:syntastic_python_checker_args = '--disable=E501' " ignore line too long error
-let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291'
+let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291,E226'
+let g:syntastic_python_pylint_post_args='--disable=missing-docstring,trailing-whitespace,too-many-arguments,line-too-long,wrong-import-order,invalid-name'
 "================================
 "
 " ========== NERD Tree ==========
@@ -329,6 +328,7 @@ nmap <leader>w :w<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 " this is the command to open the search buffer 
 nmap <leader>r :CtrlPMRU<CR>
+nmap cr :CtrlPClearCache<CR>
 let g:ctrlp_max_files = 300000
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:25,results:25'
 let g:ctrlp_cmd='CtrlP :pwd'
@@ -388,3 +388,4 @@ vnoremap <c-]> :CtrlPtjumpVisual<cr>
 let g:ctrlp_tjump_only_silent = 1
 " don't show tag name in results as it wastes space
 let g:ctrlp_tjump_skip_tag_name = 1
+
