@@ -7,6 +7,7 @@ set rtp+=~/.fzf
 
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
+Plug 'crusoexia/vim-monokai'
 Plug 'bling/vim-airline'
 Plug 'davidhalter/jedi-vim'
 Plug 'valloric/youcompleteme'
@@ -27,6 +28,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
 call plug#end()
 
@@ -67,9 +69,9 @@ set viminfo='50,"50   " '=marks for x files, "=registers for x files
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
- \ if line("'\"") > 0 && line("'\"") <= line("$") |
- \   exe "normal! g`\"" |
- \ endif
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
 
 " modelines allow you to set variables specific to a file. By default, the first 
 " and last five lines are read by vim for variable settings. For example, 
@@ -157,6 +159,11 @@ nnoremap <C-L> :nohl<CR><C-L>
 " let copy and paste work with yy, D, P, etc
 " set clipboard=unnamed
 
+""""""""""""""""""""""""""""""
+" splits
+""""""""""""""""""""""""""""""
+map <leader>v :vsp<CR>
+map <leader>h :sp<CR>
 
 """"""""""""""""""""""""""""""
 " => Status line
@@ -209,10 +216,6 @@ map gn :bn<cr>
 map gp :bp<cr>
 map gd :bd<cr> 
 
-" block commenting in python, attempt to make language specific in the future
-map mm :norm i#<cr>
-map mk :norm ^x<cr>
-
 " ******************** PLUGINS ********************
 " ========== SYNTASTIC ==========
 map sr :SyntasticCheck<CR>
@@ -241,7 +244,15 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 """ python
 let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291,E226'
-let g:syntastic_python_pylint_post_args='--disable=missing-docstring,trailing-whitespace,too-many-arguments,line-too-long,wrong-import-order,invalid-name'
+let g:syntastic_python_pylint_post_args='--disable=
+    \missing-docstring,
+    \trailing-whitespace,
+    \too-many-arguments,
+    \line-too-long,
+    \wrong-import-order,
+    \invalid-name,
+    \too-few-public-methods,
+    \bad-continuation'
 "================================
 "
 " ========== NERD Tree ==========
@@ -328,7 +339,7 @@ nmap <leader>w :w<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 " this is the command to open the search buffer 
 nmap <leader>r :CtrlPMRU<CR>
-nmap cr :CtrlPClearCache<CR>
+nmap cpr :CtrlPClearCache<CR>
 let g:ctrlp_max_files = 300000
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:25,results:25'
 let g:ctrlp_cmd='CtrlP :pwd'
@@ -346,6 +357,14 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 " ===========================
+
+" ========== Vim Commentary ==========
+nmap cm gcc<CR>
+map mm gc <CR>
+nmap mm gc<CR>
+nnoremap mm gc<CR>
+nmap cp gcap<CR>
+" ====================================
 " **************************************************
 
 " Configuration for ~/.vimrc:
