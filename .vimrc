@@ -11,6 +11,7 @@ Plug 'crusoexia/vim-monokai'
 Plug 'bling/vim-airline'
 Plug 'davidhalter/jedi-vim'
 Plug 'valloric/youcompleteme'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
@@ -254,7 +255,11 @@ let g:syntastic_python_pylint_post_args='--disable=
     \too-few-public-methods,
     \bad-continuation'
 "================================
-"
+
+" ========== YouCompleteMe ==========
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/.ycm_extra_conf.py'
+" ===================================
+
 " ========== NERD Tree ==========
 nmap <silent> <F3> :NERDTreeTabsToggle<CR>
 " map <C-n> :NERDTreeTabsToggle<CR>

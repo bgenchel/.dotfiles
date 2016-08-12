@@ -5,7 +5,7 @@ export ZSH=/Users/benjamingenchel/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="myagnoster"
 
 alias cdcp='cd /Users/benjamingenchel/Documents/CleverPet'
 alias cdc='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetCloud/cleverpet-cloud'
@@ -13,8 +13,11 @@ alias cdf='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware'
 alias cdbl='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware/cleverpet-behaviorlayer'
 alias cda='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp'
 alias cdios='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-ios-app'
+alias cdmg='cd /Users/benjamingenchel/Dropbox/Documents/Research/MohsenGroup'
+alias cddc='cd /Users/benjamingenchel/Dropbox/Documents/Research/MohsenGroup/DeepComposition'
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+
 #PS1='%n@%m:%15<..<%~%<<%# '
 
 # Uncomment the following line to use case-sensitive completion.
