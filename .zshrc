@@ -13,10 +13,13 @@ alias cdf='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware'
 alias cdbl='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware/cleverpet-behaviorlayer'
 alias cda='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp'
 alias cdios='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-ios-app'
+alias cdand='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-new-android-app'
 alias cdmg='cd /Users/benjamingenchel/Dropbox/Documents/Research/MohsenGroup'
 alias cddc='cd /Users/benjamingenchel/Dropbox/Documents/Research/MohsenGroup/DeepComposition'
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+
+export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
 
 #PS1='%n@%m:%15<..<%~%<<%# '
 
