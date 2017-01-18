@@ -1,3 +1,6 @@
+export DOTFILES=$HOME/.dotfiles
+export ZSH_CUSTOM=$DOTFILES/.oh-my-zsh/custom
+
 if [ -z $(which brew) ]; then
     echo "installing homebrew ..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -18,14 +21,14 @@ fi
 # echo "setting default shell to zsh ..."
 # sudo chsh -s /bin/zsh
 
-if [ ! -d $HOME/.dotfiles/.oh-my-zsh/plugins/zsh-syntax-highlighting ]; then
+if [ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
     echo "installing zsh syntax highlighting ..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.dotfiles/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 fi
 
-if [ ! -d $HOME/.dotfiles/.oh-my-zsh/plugins/zsh-autosuggestions ]; then
+if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
     echo "installing zsh autosuggestions ..."
-    git clone git://github.com/zsh-users/zsh-autosuggestions $HOME/.dotfiles/.oh-my-zsh/plugins/zsh-autosuggestions
+    git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 fi
 
 if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; then
@@ -42,18 +45,18 @@ if [ -a $HOME/.zshrc ]; then rm -r $HOME/.zshrc; fi
 if [ -a $HOME/.oh-my-zsh ]; then yes | rm -r $HOME/.oh-my-zsh; fi
 
 echo "linking new files ..."
-ln -s $HOME/.dotfiles/.bashrc $HOME/.bashrc
-ln -s $HOME/.dotfiles/.vimrc $HOME/.vimrc
-ln -s $HOME/.dotfiles/.vim $HOME/.vim
-ln -s $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
-ln -s $HOME/.dotfiles/.oh-my-zsh $HOME/.oh-my-zsh
+ln -s $DOTFILES/.bashrc $HOME/.bashrc
+ln -s $DOTFILES/.vimrc $HOME/.vimrc
+ln -s $DOTFILES/.vim $HOME/.vim
+ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
+ln -s $DOTFILES/.zshrc $HOME/.zshrc
+ln -s $DOTFILES/.oh-my-zsh $HOME/.oh-my-zsh
 
 echo ""
 echo ""
 echo "REMINDER - FOR ALL FEATURES TO WORK: "
-echo "    - Set terminal font to 'Meslo LG L for Powerline'"
 echo "    - Set default shell to zsh (run: chsh -s /bin/zsh)"
+echo "    - Set terminal font to 'Meslo LG L for Powerline'"
 echo "    - Install VIM Plugins (upon opening vim, run :PlugInstall)"
 echo ""
 echo ""
