@@ -3,8 +3,10 @@
 ## Installation
 1. clone this repo into your home directory
 2. run 'bash install_script.sh'
+3. set zsh as your default shell (chsh -s /bin/zsh)
+4. set Meslo LG L for Powerline as your terminal font (I use 13/14pt)
 3. open Vim, then run the command :PlugInstall
-4. quit, then reopen vim. 
+4. quit, then reopen vim.
 
 ## Shortcuts
 * tt - toggle a file tree buffer in the left pane
