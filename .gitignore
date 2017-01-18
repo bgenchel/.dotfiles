@@ -1,4 +1,7 @@
 *un\~
 *.swp
 .vim/plugged/*
-
+.oh-my-zsh/plugins/zsh-autosuggestions
+.oh-my-zsh/plugins/zsh-syntax-highlighting
+.aliases
+.custom

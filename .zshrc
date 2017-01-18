@@ -89,7 +89,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+DEFAULT_USER=$USER
 
+source .custom
+source .aliases
 # The next line updates PATH for the Google Cloud SDK.
 source '$HOME/google-cloud-sdk/path.zsh.inc'
 
