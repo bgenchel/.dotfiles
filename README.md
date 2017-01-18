@@ -2,7 +2,7 @@
 
 ## Installation
 1. clone this repo into your home directory
-2. run .install_script with whatever shell you are using.
+2. run 'bash install_script.sh'
 3. open Vim, then run the command :PlugInstall
 4. quit, then reopen vim. 
 
