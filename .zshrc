@@ -81,17 +81,19 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+DEFAULT_USER=$USER
+
+# Put all system specific aliases in the .aliases file in this directory
+# (though apparently oh-my-zsh users are encouraged to define aliases
+#  within the ZSH_CUSTOM folder). If the file does not yet exist, create it.
+#  For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-DEFAULT_USER=$USER
-
-source .custom
 source .aliases
+# Put all system specific commands in the .custom file in this directory.
+# If the file does not yet exist, create it.
+source .custom
 
 export LC_CTYPE=en_US.UTF-8
