@@ -93,10 +93,5 @@ DEFAULT_USER=$USER
 
 source .custom
 source .aliases
-# The next line updates PATH for the Google Cloud SDK.
-source '$HOME/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables shell command completion for gcloud.
-source '$HOME/google-cloud-sdk/completion.zsh.inc'
 
 export LC_CTYPE=en_US.UTF-8
