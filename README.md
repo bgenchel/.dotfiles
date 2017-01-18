@@ -11,10 +11,8 @@
 ## Shortcuts
 * tt - toggle a file tree buffer in the left pane
 * gb - open a buffer listing a quick menu to hop to open buffers
-* mm - (useful for python, insert a '#' character at the beginning of the line you're on.
-  Also works in visual mode)
-* mk - (useful for python, remove a '#' character from the beginning of the line you're
-  on. Also works in visual mode)
+* cm - comment/uncomment current line
+* mm - comment/uncomment current line or block in visual mode
 * st - toggle linter mode between active and passive. Active - check on file open and
   save, Passive, run only when told.
 * sr - run a linter check on your code
