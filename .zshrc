@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_CUSTOM=$ZSH/custom
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -83,17 +84,22 @@ source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER=$USER
 
-# Put all system specific aliases in the .aliases file in the .dotfiles directory
-# (though apparently oh-my-zsh users are encouraged to define aliases
-#  within the ZSH_CUSTOM folder). If the file does not yet exist, create it.
-#  For a full list of active aliases, run `alias`.
+# If the aliases.zsh file does not exist in the ZSH_CUSTOM dir yet, create and
+# initialize it. Put all system specific aliases in this file.
+if [[ ! -a $ZSH_CUSTOM/aliases.zsh ]]; then
+    touch $ZSH_CUSTOM/aliases.zsh
+    echo "# For a full list of active aliases, run 'alias'." >> $ZSH_CUSTOM/aliases.zsh
+    echo "#" >> $ZSH_CUSTOM/aliases.zsh
+    echo "# Example aliases:" >> $ZSH_CUSTOM/aliases.zsh
+    echo "# alias zshconfig=\"mate ~/.zshrc\"" >> $ZSH_CUSTOM/aliases.zsh
+    echo "# alias ohmyzsh=\"mate ~/.oh-my-zsh\"" >> $ZSH_CUSTOM/aliases.zsh
+fi
+
+# If the custom.zsh file does not exist in the ZSH_CUSTOM dir yet, create it.
+# Place all system specific non-alias commands/instructions in this file.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-source $HOME/.dotfiles/.aliases
-# Put all system specific commands in the .custom file in the .dotfiles directory.
-# If the file does not yet exist, create it.
-source $HOME/.dotfiles/.custom
+if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
+    touch $ZSH_CUSTOM/custom.zsh
+fi
 
 export LC_CTYPE=en_US.UTF-8
