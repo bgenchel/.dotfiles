@@ -83,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER=$USER
 
-# Put all system specific aliases in the .aliases file in this directory
+# Put all system specific aliases in the .aliases file in the .dotfiles directory
 # (though apparently oh-my-zsh users are encouraged to define aliases
 #  within the ZSH_CUSTOM folder). If the file does not yet exist, create it.
 #  For a full list of active aliases, run `alias`.
@@ -91,9 +91,9 @@ DEFAULT_USER=$USER
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source .aliases
-# Put all system specific commands in the .custom file in this directory.
+source $HOME/.dotfiles/.aliases
+# Put all system specific commands in the .custom file in the .dotfiles directory.
 # If the file does not yet exist, create it.
-source .custom
+source $HOME/.dotfiles/.custom
 
 export LC_CTYPE=en_US.UTF-8
