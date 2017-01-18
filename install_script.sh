@@ -54,6 +54,7 @@ echo ""
 echo "REMINDER - FOR ALL FEATURES TO WORK: "
 echo "    - Set terminal font to 'Meslo LG L for Powerline'"
 echo "    - Set default shell to zsh (run: chsh -s /bin/zsh)"
+echo "    - Install VIM Plugins (upon opening vim, run :PlugInstall)"
 echo ""
 echo ""
 
