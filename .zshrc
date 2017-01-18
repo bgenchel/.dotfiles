@@ -9,7 +9,7 @@ ZSH_THEME="myagnoster"
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
-export EDITOR="/user/local/Cellar/macvim/8.0-121/MacVim.app/Contents/MacOS/Vim"
+export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
 
 #PS1='%n@%m:%15<..<%~%<<%# '
 
