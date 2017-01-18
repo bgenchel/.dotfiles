@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/benjamingenchel/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -7,19 +7,9 @@ export ZSH=/Users/benjamingenchel/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="myagnoster"
 
-alias cdcp='cd /Users/benjamingenchel/Documents/CleverPet'
-alias cdc='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetCloud/cleverpet-cloud'
-alias cdf='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware'
-alias cdbl='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetFirmware/cleverpet-behaviorlayer'
-alias cda='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp'
-alias cdios='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-ios-app'
-alias cdand='cd /Users/benjamingenchel/Documents/CleverPet/CleverPetApp/cleverpet-new-android-app'
-alias cdmg='cd /Users/benjamingenchel/Dropbox/Documents/Research/MohsenGroup'
-alias cddc='cd /Users/benjamingenchel/Dropbox/Documents/Research/MohsenGroup/DeepComposition'
-
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
-export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
+export EDITOR="/user/local/Cellar/macvim/8.0-121/MacVim.app/Contents/MacOS/Vim"
 
 #PS1='%n@%m:%15<..<%~%<<%# '
 
@@ -65,7 +55,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 # User configuration
 export PATH="$HOME/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -99,13 +89,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-DEFAULT_USER=benjamingenchel
-
 
 # The next line updates PATH for the Google Cloud SDK.
-source '/Users/benjamingenchel/google-cloud-sdk/path.zsh.inc'
+source '$HOME/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
-source '/Users/benjamingenchel/google-cloud-sdk/completion.zsh.inc'
+source '$HOME/google-cloud-sdk/completion.zsh.inc'
 
 export LC_CTYPE=en_US.UTF-8
