@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$ZSH/custom
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -103,3 +104,5 @@ if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
 fi
 
 export LC_CTYPE=en_US.UTF-8
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -36,6 +36,29 @@ if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; 
     curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
 fi
 
+if [ ! -d $HOME/.fzf ]; then
+    echo "installing fzf ..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+    ./$HOME/.fzf/install
+    if [ -z $(which go) ]; then
+        echo "installing go ..."
+    fi
+    cd $HOME/.fzf/src
+    make
+    make install
+    make release
+    make release-all
+    export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+fi
+
+echo "installing Vim plugins ..."
+vim +PlugInstall +qall
+vim +PlugClean +qall
+vim +PlugInstall +qall
+
+echo "building YouCompleteMe ..."
+python $HOME/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
+
 echo "clearing out old files ..."
 if [ -a $HOME/.bashrc ]; then rm -r $HOME/.bashrc; fi
 if [ -a $HOME/.vimrc ]; then rm -r $HOME/.vimrc; fi
@@ -57,7 +80,6 @@ echo ""
 echo "REMINDER - FOR ALL FEATURES TO WORK: "
 echo "    - Set default shell to zsh (run: chsh -s /bin/zsh)"
 echo "    - Set terminal font to 'Meslo LG L for Powerline'"
-echo "    - Install VIM Plugins (upon opening vim, run :PlugInstall)"
 echo ""
 echo ""
 

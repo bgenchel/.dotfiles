@@ -30,7 +30,7 @@ Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
+" Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
 call plug#end()
 
 filetype indent plugin on
