@@ -36,13 +36,14 @@ if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; 
     curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
 fi
 
+if [ -z $(which go) ]; then
+    echo "installing go ..."
+fi
+
 if [ ! -d $HOME/.fzf ]; then
     echo "installing fzf ..."
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
     ./$HOME/.fzf/install
-    if [ -z $(which go) ]; then
-        echo "installing go ..."
-    fi
     cd $HOME/.fzf/src
     make
     make install
@@ -57,7 +58,7 @@ vim +PlugClean +qall
 vim +PlugInstall +qall
 
 echo "building YouCompleteMe ..."
-python $HOME/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
+python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
 
 echo "clearing out old files ..."
 if [ -a $HOME/.bashrc ]; then rm -r $HOME/.bashrc; fi
