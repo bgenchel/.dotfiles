@@ -158,7 +158,7 @@ set incsearch
 nnoremap <C-L> :nohl<CR><C-L>
 
 " let copy and paste work with yy, D, P, etc
-" set clipboard=unnamed
+set clipboard=unnamed
 "
 nnoremap :b :Bclose<Cr>
 
