@@ -16,6 +16,7 @@ argdo %s/left /LEFT /g
 argdo %s/right /RIGHT /g
 argdo %s/join /JOIN /g
 argdo %s/when /WHEN /g
+argdo %s/then /THEN /g
 argdo %s/end as /END AS /g
 
 argdo %s/round(/ROUND(/g
