@@ -126,8 +126,8 @@ set noswapfile
 set nobackup
 set nowb
 
-" Keep undo history across sessions, by storing in file. This never works (?)
-set undofile
+" Keep undo history across sessions, by storing in file.
+" set undofile
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
