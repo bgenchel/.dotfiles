@@ -106,3 +106,5 @@ fi
 export LC_CTYPE=en_US.UTF-8
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
