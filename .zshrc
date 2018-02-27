@@ -13,6 +13,8 @@ alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
 export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
 
+export DISPLAY=":0"
+
 #PS1='%n@%m:%15<..<%~%<<%# '
 
 # Uncomment the following line to use case-sensitive completion.
@@ -108,3 +110,9 @@ export LC_CTYPE=en_US.UTF-8
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc'; fi
