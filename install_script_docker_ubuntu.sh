@@ -7,7 +7,7 @@ export ZSH_CUSTOM=$DOTFILES/.oh-my-zsh/custom
 # fi
 if [ -z $(which tmux) ]; then
     echo "installing tmux ..."
-    apt-get install tmux
+    yes | apt-get install tmux
 fi
 
 # echo "setting default shell to zsh ..."
@@ -15,7 +15,7 @@ fi
 
 if [ -z $(which zsh) ]; then
     echo "installing zsh ..."
-    apt-get install zsh
+    yes | apt-get install zsh
 fi
 
 if [ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
