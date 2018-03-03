@@ -1,6 +1,22 @@
 export DOTFILES=$HOME/.dotfiles
 export ZSH_CUSTOM=$DOTFILES/.oh-my-zsh/custom
 
+echo "clearing out old files ..."
+# if [ -a $HOME/.bashrc ]; then rm -r $HOME/.bashrc; fi
+if [ -a $HOME/.vimrc ]; then rm -r $HOME/.vimrc; fi
+if [ -a $HOME/.vim ]; then yes | rm -r $HOME/.vim; fi
+if [ -a $HOME/.tmux.conf ]; then rm -r $HOME/.tmux.conf; fi
+if [ -a $HOME/.zshrc ]; then rm -r $HOME/.zshrc; fi
+if [ -a $HOME/.oh-my-zsh ]; then yes | rm -r $HOME/.oh-my-zsh; fi
+
+echo "linking new files ..."
+# ln -s $DOTFILES/.bashrc $HOME/.bashrc
+ln -s $DOTFILES/.vimrc $HOME/.vimrc
+ln -s $DOTFILES/.vim $HOME/.vim
+ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
+ln -s $DOTFILES/.zshrc $HOME/.zshrc
+ln -s $DOTFILES/.oh-my-zsh $HOME/.oh-my-zsh
+
 # if [ -z $(which brew) ]; then
     # echo "installing homebrew ..."
     # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -56,22 +72,6 @@ vim +PlugInstall +qall
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
-
-echo "clearing out old files ..."
-# if [ -a $HOME/.bashrc ]; then rm -r $HOME/.bashrc; fi
-if [ -a $HOME/.vimrc ]; then rm -r $HOME/.vimrc; fi
-if [ -a $HOME/.vim ]; then yes | rm -r $HOME/.vim; fi
-if [ -a $HOME/.tmux.conf ]; then rm -r $HOME/.tmux.conf; fi
-if [ -a $HOME/.zshrc ]; then rm -r $HOME/.zshrc; fi
-if [ -a $HOME/.oh-my-zsh ]; then yes | rm -r $HOME/.oh-my-zsh; fi
-
-echo "linking new files ..."
-# ln -s $DOTFILES/.bashrc $HOME/.bashrc
-ln -s $DOTFILES/.vimrc $HOME/.vimrc
-ln -s $DOTFILES/.vim $HOME/.vim
-ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
-ln -s $DOTFILES/.zshrc $HOME/.zshrc
-ln -s $DOTFILES/.oh-my-zsh $HOME/.oh-my-zsh
 
 echo ""
 echo ""
