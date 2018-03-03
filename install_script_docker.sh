@@ -50,10 +50,10 @@ if [ ! -d $WD/.fzf ]; then
     export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 fi
 
-echo "installing Vim plugins ..."
-vim +PlugInstall +qall
-vim +PlugClean +qall
-vim +PlugInstall +qall
+# echo "installing Vim plugins ..."
+# vim +PlugInstall +qall
+# vim +PlugClean +qall
+# vim +PlugInstall +qall
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
