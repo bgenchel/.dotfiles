@@ -1,21 +1,6 @@
-export DOTFILES=$HOME/.dotfiles
+export WD=$(cd .. && echo $PWD)
+export DOTFILES=$WD/.dotfiles
 export ZSH_CUSTOM=$DOTFILES/.oh-my-zsh/custom
-
-echo "clearing out old files ..."
-# if [ -a $HOME/.bashrc ]; then rm -r $HOME/.bashrc; fi
-if [ -a $HOME/.vimrc ]; then rm -r $HOME/.vimrc; fi
-if [ -a $HOME/.vim ]; then yes | rm -r $HOME/.vim; fi
-if [ -a $HOME/.tmux.conf ]; then rm -r $HOME/.tmux.conf; fi
-if [ -a $HOME/.zshrc ]; then rm -r $HOME/.zshrc; fi
-if [ -a $HOME/.oh-my-zsh ]; then yes | rm -r $HOME/.oh-my-zsh; fi
-
-echo "linking new files ..."
-# ln -s $DOTFILES/.bashrc $HOME/.bashrc
-ln -s $DOTFILES/.vimrc $HOME/.vimrc
-ln -s $DOTFILES/.vim $HOME/.vim
-ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
-ln -s $DOTFILES/.zshrc $HOME/.zshrc
-ln -s $DOTFILES/.oh-my-zsh $HOME/.oh-my-zsh
 
 # if [ -z $(which brew) ]; then
     # echo "installing homebrew ..."
@@ -53,11 +38,11 @@ fi
     # echo "installing go ..."
 # fi
 
-if [ ! -d $HOME/.fzf ]; then
+if [ ! -d $WD/.fzf ]; then
     echo "installing fzf ..."
-    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-    ./$HOME/.fzf/install
-    cd $HOME/.fzf/src
+    git clone --depth 1 https://github.com/junegunn/fzf.git $WD/.fzf
+    ./$WD/.fzf/install
+    cd $WD/.fzf/src
     make
     make install
     make release
@@ -72,6 +57,22 @@ vim +PlugInstall +qall
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
+
+echo "clearing out old files ..."
+# if [ -a $WD/.bashrc ]; then rm -r $WD/.bashrc; fi
+if [ -a $WD/.vimrc ]; then rm -r $WD/.vimrc; fi
+if [ -a $WD/.vim ]; then yes | rm -r $WD/.vim; fi
+if [ -a $WD/.tmux.conf ]; then rm -r $WD/.tmux.conf; fi
+if [ -a $WD/.zshrc ]; then rm -r $WD/.zshrc; fi
+if [ -a $WD/.oh-my-zsh ]; then yes | rm -r $WD/.oh-my-zsh; fi
+
+echo "linking new files ..."
+# ln -s $DOTFILES/.bashrc $WD/.bashrc
+ln -s $DOTFILES/.vimrc $WD/.vimrc
+ln -s $DOTFILES/.vim $WD/.vim
+ln -s $DOTFILES/.tmux.conf $WD/.tmux.conf
+ln -s $DOTFILES/.zshrc $WD/.zshrc
+ln -s $DOTFILES/.oh-my-zsh $WD/.oh-my-zsh
 
 echo ""
 echo ""
