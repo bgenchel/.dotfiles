@@ -1,5 +1,4 @@
-export WD=$(cd .. && echo $PWD)
-export DOTFILES=$WD/.dotfiles
+export DOTFILES=/.dotfiles
 export ZSH_CUSTOM=$DOTFILES/.oh-my-zsh/custom
 
 # if [ -z $(which brew) ]; then
@@ -38,11 +37,11 @@ fi
     # echo "installing go ..."
 # fi
 
-if [ ! -d $WD/.fzf ]; then
+if [ ! -d /.fzf ]; then
     echo "installing fzf ..."
-    git clone --depth 1 https://github.com/junegunn/fzf.git $WD/.fzf
-    ./$WD/.fzf/install
-    cd $WD/.fzf/src
+    git clone --depth 1 https://github.com/junegunn/fzf.git /.fzf
+    /.fzf/install
+    cd /.fzf/src
     make
     make install
     make release
@@ -59,20 +58,20 @@ echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
 
 echo "clearing out old files ..."
-# if [ -a $WD/.bashrc ]; then rm -r $WD/.bashrc; fi
-if [ -a $WD/.vimrc ]; then rm -r $WD/.vimrc; fi
-if [ -a $WD/.vim ]; then yes | rm -r $WD/.vim; fi
-if [ -a $WD/.tmux.conf ]; then rm -r $WD/.tmux.conf; fi
-if [ -a $WD/.zshrc ]; then rm -r $WD/.zshrc; fi
-if [ -a $WD/.oh-my-zsh ]; then yes | rm -r $WD/.oh-my-zsh; fi
+# if [ -a /.bashrc ]; then rm -r /.bashrc; fi
+if $(test -e /.vimrc ); then rm -r /.vimrc; fi
+if $(test -e /.vim ); then yes | rm -r /.vim; fi
+if $(test -e /.tmux.conf); then rm -r /.tmux.conf; fi
+if $(test -e /.zshrc); then rm -r /.zshrc; fi
+if $(test -e /.oh-my-zsh); then yes | rm -r /.oh-my-zsh; fi
 
 echo "linking new files ..."
-# ln -s $DOTFILES/.bashrc $WD/.bashrc
-ln -s $DOTFILES/.vimrc $WD/.vimrc
-ln -s $DOTFILES/.vim $WD/.vim
-ln -s $DOTFILES/.tmux.conf $WD/.tmux.conf
-ln -s $DOTFILES/.zshrc $WD/.zshrc
-ln -s $DOTFILES/.oh-my-zsh $WD/.oh-my-zsh
+# ln -s $DOTFILES/.bashrc /.bashrc
+ln -s $DOTFILES/.vimrc /.vimrc
+ln -s $DOTFILES/.vim /.vim
+ln -s $DOTFILES/.tmux.conf /.tmux.conf
+ln -s $DOTFILES/.zshrc /.zshrc
+ln -s $DOTFILES/.oh-my-zsh /.oh-my-zsh
 
 echo ""
 echo ""
