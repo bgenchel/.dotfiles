@@ -11,7 +11,7 @@ if [ -z $(which tmux) ]; then
 fi
 
 # echo "setting default shell to zsh ..."
-# sudo chsh -s /bin/zsh
+# chsh -s /bin/zsh
 
 if [ -z $(which zsh) ]; then
     echo "installing zsh ..."
@@ -28,9 +28,10 @@ if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
     git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 fi
 
-if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; then
+if [ -z $(find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; then
     echo "installing Meslo LG L for Powerline font ..."
-    curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
+    # curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
+    curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf
 fi
 
 # if [ -z $(which go) ]; then
@@ -54,9 +55,9 @@ fi
 # vim +PlugInstall +qall
 
 echo "cloning YouCompleteMe ..."
-mkdir $DOTFILES/.vim/plugged/youcompleteme
+# mkdir $DOTFILES/.vim/plugged/youcompleteme
 git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/youcompleteme
-git submodule update --init --recursive
+cd $DOTFILES/.vim/plugged/youcompleteme && git submodule update --init --recursive
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
