@@ -1,4 +1,4 @@
-export DOTFILES=/.dotfiles
+export DOTFILES=$HOME/.dotfiles
 export ZSH_CUSTOM=$DOTFILES/.oh-my-zsh/custom
 
 # if [ -z $(which brew) ]; then
@@ -28,11 +28,8 @@ if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
     git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 fi
 
-if [ -z $(find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; then
-    echo "installing Meslo LG L for Powerline font ..."
-    # curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
-    curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf
-fi
+echo "placing Meslo LG L for Powerline font ..."
+cp fonts/MesloLGRegularforPowerline.otf /usr/share/fonts/
 
 # if [ -z $(which go) ]; then
     # echo "installing go ..."
@@ -49,34 +46,38 @@ fi
 #     export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # fi
 
-# echo "installing Vim plugins ..."
-# vim +PlugInstall +qall
-# vim +PlugClean +qall
-# vim +PlugInstall +qall
-
 echo "cloning YouCompleteMe ..."
 # mkdir $DOTFILES/.vim/plugged/youcompleteme
 git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/youcompleteme
 cd $DOTFILES/.vim/plugged/youcompleteme && git submodule update --init --recursive
 
+echo "installing YouCompleteMe supporting libraries..."
+yes | apt-get install build-essential cmake
+yes | apt-get install python-dev python3-dev
+
 echo "building YouCompleteMe ..."
-python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
+python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer
+
+# echo "installing Vim plugins ..."
+# vim +PlugInstall +qall
+# vim +PlugClean +qall
+# vim +PlugInstall +qall
 
 echo "clearing out old files ..."
 # if [ -a /.bashrc ]; then rm -r /.bashrc; fi
-if $(test -e /.vimrc ); then rm -r /.vimrc; fi
-if $(test -e /.vim ); then yes | rm -r /.vim; fi
-if $(test -e /.tmux.conf); then rm -r /.tmux.conf; fi
-if $(test -e /.zshrc); then rm -r /.zshrc; fi
-if $(test -e /.oh-my-zsh); then yes | rm -r /.oh-my-zsh; fi
+if $(test -e /.vimrc ); then rm -r $HOME/.vimrc; fi
+if $(test -e /.vim ); then yes | rm -r $HOME/.vim; fi
+if $(test -e /.tmux.conf); then rm -r $HOME/.tmux.conf; fi
+if $(test -e /.zshrc); then rm -r $HOME/.zshrc; fi
+if $(test -e /.oh-my-zsh); then yes | rm -r $HOME/.oh-my-zsh; fi
 
-echo "linking new files ..."
+echo "placing new files ..."
 # ln -s $DOTFILES/.bashrc /.bashrc
-ln -s $DOTFILES/.vimrc /.vimrc
-ln -s $DOTFILES/.vim /.vim
-ln -s $DOTFILES/.tmux.conf /.tmux.conf
-ln -s $DOTFILES/.zshrc /.zshrc
-ln -s $DOTFILES/.oh-my-zsh /.oh-my-zsh
+cp $DOTFILES/.vimrc $HOME/
+cp -r $DOTFILES/.vim $HOME/
+cp $DOTFILES/.tmux.conf $HOME/
+cp $DOTFILES/.zshrc $HOME/
+cp -r $DOTFILES/.oh-my-zsh $HOME/
 
 echo ""
 echo ""
