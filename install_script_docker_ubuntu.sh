@@ -41,11 +41,10 @@ if [ ! -d /.fzf ]; then
     echo "installing fzf ..."
     git clone --depth 1 https://github.com/junegunn/fzf.git /.fzf
     /.fzf/install
-    cd /.fzf/src
-    make
-    make install
-    make release
-    make release-all
+    /.fzf/src/make
+    /.fzf/src/make install
+    /.fzf/src/make release
+    /.fzf/src/make release-all
     export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 fi
 
@@ -53,6 +52,10 @@ fi
 # vim +PlugInstall +qall
 # vim +PlugClean +qall
 # vim +PlugInstall +qall
+
+echo "cloning YouCompleteMe ..."
+mkdir $DOTFILES/.vim/plugged/youcompleteme
+git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/youcompleteme
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
