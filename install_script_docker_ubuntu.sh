@@ -37,16 +37,16 @@ fi
     # echo "installing go ..."
 # fi
 
-if [ ! -d /.fzf ]; then
-    echo "installing fzf ..."
-    git clone --depth 1 https://github.com/junegunn/fzf.git /.fzf
-    /.fzf/install
-    /.fzf/src/make
-    /.fzf/src/make install
-    /.fzf/src/make release
-    /.fzf/src/make release-all
-    export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-fi
+# if [ ! -d /.fzf ]; then
+#     echo "installing fzf ..."
+#     git clone --depth 1 https://github.com/junegunn/fzf.git /.fzf
+#     /.fzf/install
+#     /.fzf/src/make
+#     /.fzf/src/make install
+#     /.fzf/src/make release
+#     /.fzf/src/make release-all
+#     export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+# fi
 
 # echo "installing Vim plugins ..."
 # vim +PlugInstall +qall
@@ -56,6 +56,7 @@ fi
 echo "cloning YouCompleteMe ..."
 mkdir $DOTFILES/.vim/plugged/youcompleteme
 git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/youcompleteme
+git submodule update --init --recursive
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
