@@ -9,7 +9,11 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # time that oh-my-zsh is loaded.
 ZSH_THEME="myagnoster"
 
-alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+
+if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
+then 
+    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
+fi
 
 export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
 
