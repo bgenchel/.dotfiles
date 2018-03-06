@@ -2,6 +2,8 @@
 " won't be run.
 filetype off
 
+set encoding=utf-8
+
 " Setup FZF
 set rtp+=~/.fzf
 

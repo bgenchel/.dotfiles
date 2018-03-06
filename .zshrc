@@ -110,6 +110,7 @@ if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
 fi
 
 export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
