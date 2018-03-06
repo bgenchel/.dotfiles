@@ -1,0 +1,18 @@
+FROM pytorch:latest
+MAINTAINER Benjamin Genchel (benjiegenchel@gmail.com)
+WORKDIR /root
+
+RUN yes | apt-get -qq update
+RUN yes | apt-get -qq -y install curl
+RUN yes | apt-get install -y --no-install-recommends apt-utils
+RUN yes | apt-get install -y --no-install-recommends libav-tools
+
+RUN git clone https://github.com/bgenchel/.dotfiles.git
+RUN ls -a ./.dotfiles
+RUN chmod +x ./.dotfiles/docker_ubuntu_install_script.sh
+RUN ./.dotfiles/docker_ubuntu_install_script.sh
+RUN chsh -s $(which zsh)
+
+RUN pip install librosa matplotlib
+RUN pip install tensorflow-gpu tensorboard-logger
+RUN pip install sox pyyaml

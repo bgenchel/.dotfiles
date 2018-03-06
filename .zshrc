@@ -13,6 +13,13 @@ ZSH_THEME="myagnoster"
 if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
 then 
     alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
+    export PATH="$HOME/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc'; fi
+    # The next line enables shell command completion for gcloud.
+    if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc'; fi
 fi
 
 export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
@@ -66,7 +73,6 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 # User configuration
-export PATH="$HOME/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 setopt PROMPT_SUBST
 PROMPT='%{$(pwd|grep --color=always /)%${#PWD}G%} %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%#%f '
@@ -111,13 +117,3 @@ fi
 
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc'; fi
