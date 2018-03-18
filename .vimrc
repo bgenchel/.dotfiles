@@ -32,6 +32,7 @@ Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
+Plug 'highwaynoise/chuck.vim'
 " Plug 'munshkr/vim-tidal'
 " Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
 call plug#end()
