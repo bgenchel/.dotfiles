@@ -179,10 +179,10 @@ map <leader>h :sp<CR>
 set laststatus=2
 
 " Line text past 80 char
-set textwidth=90
+set textwidth=100
 "set colorcolumn=+1 " relative (to textwidth) columns to highlight "
 
-set colorcolumn=81 " absolute columns to highlight "
+set colorcolumn=80 " absolute columns to highlight "
 
 " Tabs Settings
 set shiftwidth=4    " two spaces per indent
