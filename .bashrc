@@ -124,3 +124,7 @@ export CUDA_DEVICE_ORDER="PCI_BUS_ID"
 # alias
 alias python=python3
 alias ipython=ipython3
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
