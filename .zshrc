@@ -11,8 +11,8 @@ ZSH_THEME="myagnoster"
 
 if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
 then 
+    . $HOME/anaconda/etc/profile.d/conda.sh
     alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
-    export PATH="$HOME/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     # The next line updates PATH for the Google Cloud SDK.
@@ -22,7 +22,6 @@ then
 fi
 
 export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
-
 export DISPLAY=":0"
 
 #PS1='%n@%m:%15<..<%~%<<%# '
