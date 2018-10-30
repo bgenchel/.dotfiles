@@ -12,7 +12,6 @@ fi
 
 # echo "setting default shell to zsh ..."
 # chsh -s /bin/zsh
-
 if [ -z $(which zsh) ]; then
     echo "installing zsh ..."
     yes | apt-get install zsh
@@ -31,10 +30,6 @@ fi
 echo "placing Meslo LG L for Powerline font ..."
 cp fonts/MesloLGRegularforPowerline.otf /usr/share/fonts/
 
-# if [ -z $(which go) ]; then
-    # echo "installing go ..."
-# fi
-
 # if [ ! -d /.fzf ]; then
 #     echo "installing fzf ..."
 #     git clone --depth 1 https://github.com/junegunn/fzf.git /.fzf
@@ -48,12 +43,17 @@ cp fonts/MesloLGRegularforPowerline.otf /usr/share/fonts/
 
 echo "cloning YouCompleteMe ..."
 # mkdir $DOTFILES/.vim/plugged/youcompleteme
-git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/youcompleteme
-cd $DOTFILES/.vim/plugged/youcompleteme && git submodule update --init --recursive
+git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/YouCompleteMe
+cd $DOTFILES/.vim/plugged/YouCompleteMe && git submodule update --init --recursive
 
 echo "installing YouCompleteMe supporting libraries..."
+# C-family Language Support
+yes | apt-get install clang
 yes | apt-get install build-essential cmake
-yes | apt-get install python-dev python3-dev
+# Javascript / Typescript Support
+yes | apt-get install nodejs
+yes | apt-get install npm
+yes | npm install -g typescript
 
 echo "building YouCompleteMe ..."
 python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer

@@ -1,3 +1,5 @@
+export DOTFILES=$HOME/.dotfiles
+
 echo "clearing out old files ..."
 if $(test -e /.bashrc ); then rm -r /.bashrc; fi
 if $(test -e /.vimrc ); then rm -r $HOME/.vimrc; fi

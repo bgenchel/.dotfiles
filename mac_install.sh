@@ -36,10 +36,6 @@ if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; 
     curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
 fi
 
-if [ -z $(which go) ]; then
-    echo "installing go ..."
-fi
-
 if [ ! -d $HOME/.fzf ]; then
     echo "installing fzf ..."
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
@@ -52,13 +48,22 @@ if [ ! -d $HOME/.fzf ]; then
     export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 fi
 
-echo "installing Vim plugins ..."
-vim +PlugInstall +qall
-vim +PlugClean +qall
-vim +PlugInstall +qall
+echo "installing YouCompleteMe supporting libraries..."
+# C-family Language Support
+yes | brew install clang
+yes | brew install build-essential cmake
+# Javascript / Typescript Support
+yes | brew install node
+yes | apt-get install npm
+yes | npm install -g typescript
 
 echo "building YouCompleteMe ..."
-python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer --tern-completer
+python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer
+
+# echo "installing Vim plugins ..."
+# vim +PlugInstall +qall
+# vim +PlugClean +qall
+# vim +PlugInstall +qall
 
 echo "clearing out old files ..."
 if [ -a $HOME/.bashrc ]; then rm -r $HOME/.bashrc; fi
@@ -81,6 +86,7 @@ echo ""
 echo "REMINDER - FOR ALL FEATURES TO WORK: "
 echo "    - Set default shell to zsh (run: chsh -s /bin/zsh)"
 echo "    - Set terminal font to 'Meslo LG L for Powerline'"
+echo "    - Open Vim and run :PlugInstall"
 echo ""
 echo ""
 
