@@ -108,7 +108,6 @@ fi
 
 # If the custom.zsh file does not exist in the ZSH_CUSTOM dir yet, create it.
 # Place all system specific non-alias commands/instructions in this file.
-#
 if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
     touch $ZSH_CUSTOM/custom.zsh
 fi
