@@ -19,12 +19,52 @@ then
     if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc'; fi
     # The next line enables shell command completion for gcloud.
     if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc'; fi
+
+    export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
+    export DISPLAY=":0" elif [[ $(uname) = "Linux" ]];
+    export EDITOR=$(which vim)
 fi
 
-export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
-export DISPLAY=":0"
+# User configuration
+# Try to make a custom prompt with shortening but this doesn't actually work for some reason
+setopt PROMPT_SUBST
+PROMPT='%{$(pwd|grep --color=always /)%${#PWD}G%} %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%#%f '
 
-#PS1='%n@%m:%15<..<%~%<<%# '
+DEFAULT_USER=$USER
+
+source $ZSH/oh-my-zsh.sh
+
+# Display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
+# If the aliases.zsh file does not exist in the ZSH_CUSTOM dir yet, create and
+# initialize it. Put all system specific aliases in this file.
+if [[ ! -a $ZSH_CUSTOM/aliases.zsh ]]; then
+    touch $ZSH_CUSTOM/aliases.zsh
+    echo "# For a full list of active aliases, run 'alias'." >> $ZSH_CUSTOM/aliases.zsh
+    echo "#" >> $ZSH_CUSTOM/aliases.zsh
+    echo "# Example aliases:" >> $ZSH_CUSTOM/aliases.zsh
+    echo "# alias zshconfig=\"mate ~/.zshrc\"" >> $ZSH_CUSTOM/aliases.zsh
+    echo "# alias ohmyzsh=\"mate ~/.oh-my-zsh\"" >> $ZSH_CUSTOM/aliases.zsh
+fi
+
+# If the custom.zsh file does not exist in the ZSH_CUSTOM dir yet, create it.
+# Place all system specific non-alias commands/instructions in this file.
+#
+if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
+    touch $ZSH_CUSTOM/custom.zsh
+fi
+
+autoload throw catch
+
+export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,8 +88,6 @@ export DISPLAY=":0"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -64,18 +102,6 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
-
-# User configuration
-# export MANPATH="/usr/local/man:$MANPATH"
-setopt PROMPT_SUBST
-PROMPT='%{$(pwd|grep --color=always /)%${#PWD}G%} %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%#%f '
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -92,27 +118,3 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-DEFAULT_USER=$USER
-
-# If the aliases.zsh file does not exist in the ZSH_CUSTOM dir yet, create and
-# initialize it. Put all system specific aliases in this file.
-if [[ ! -a $ZSH_CUSTOM/aliases.zsh ]]; then
-    touch $ZSH_CUSTOM/aliases.zsh
-    echo "# For a full list of active aliases, run 'alias'." >> $ZSH_CUSTOM/aliases.zsh
-    echo "#" >> $ZSH_CUSTOM/aliases.zsh
-    echo "# Example aliases:" >> $ZSH_CUSTOM/aliases.zsh
-    echo "# alias zshconfig=\"mate ~/.zshrc\"" >> $ZSH_CUSTOM/aliases.zsh
-    echo "# alias ohmyzsh=\"mate ~/.oh-my-zsh\"" >> $ZSH_CUSTOM/aliases.zsh
-fi
-
-# If the custom.zsh file does not exist in the ZSH_CUSTOM dir yet, create it.
-# Place all system specific non-alias commands/instructions in this file.
-if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
-    touch $ZSH_CUSTOM/custom.zsh
-fi
-
-autoload throw catch
-
-export LC_CTYPE=en_US.UTF-8
-export LANG=en_US.UTF-8
