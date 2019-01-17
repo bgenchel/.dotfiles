@@ -21,7 +21,8 @@ then
     if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc'; fi
 
     export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
-    export DISPLAY=":0" elif [[ $(uname) = "Linux" ]];
+    export DISPLAY=":0" 
+elif [[ $(uname) = "Linux" ]]; then
     export EDITOR=$(which vim)
 fi
 
@@ -31,8 +32,6 @@ setopt PROMPT_SUBST
 PROMPT='%{$(pwd|grep --color=always /)%${#PWD}G%} %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%#%f '
 
 DEFAULT_USER=$USER
-
-source $ZSH/oh-my-zsh.sh
 
 # Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -65,6 +64,9 @@ autoload throw catch
 
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# this needs to go after the plugins declaration or it won't work automatically
+source $ZSH/oh-my-zsh.sh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -101,10 +103,6 @@ export LANG=en_US.UTF-8
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
