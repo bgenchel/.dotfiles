@@ -41,10 +41,14 @@ cp fonts/MesloLGRegularforPowerline.otf /usr/share/fonts/
 #     export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # fi
 
-echo "cloning YouCompleteMe ..."
+###
+# seems like it is not necessary to install this way. Should just install 
+# with vim :PlugInstall
+###
+# echo "cloning YouCompleteMe ..."
 # mkdir $DOTFILES/.vim/plugged/youcompleteme
-git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/YouCompleteMe
-cd $DOTFILES/.vim/plugged/YouCompleteMe && git submodule update --init --recursive
+# git clone https://github.com/Valloric/YouCompleteMe.git $DOTFILES/.vim/plugged/YouCompleteMe
+# cd $DOTFILES/.vim/plugged/YouCompleteMe && git submodule update --init --recursive
 
 echo "installing YouCompleteMe supporting libraries..."
 # C-family Language Support
@@ -55,15 +59,7 @@ yes | apt-get install nodejs
 yes | apt-get install npm
 yes | npm install -g typescript
 
-echo "building YouCompleteMe ..."
-python $DOTFILES/.vim/plugged/youcompleteme/install.py --clang-completer
-
-# echo "installing Vim plugins ..."
-# vim +PlugInstall +qall
-# vim +PlugClean +qall
-# vim +PlugInstall +qall
-
-echo "clearing out old files ..."
+echo "clearing out old files + dirs ..."
 if $(test -e /.bashrc ); then rm -r /.bashrc; fi
 if $(test -e /.vimrc ); then rm -r $HOME/.vimrc; fi
 if $(test -e /.vim ); then yes | rm -r $HOME/.vim; fi
@@ -71,13 +67,21 @@ if $(test -e /.tmux.conf); then rm -r $HOME/.tmux.conf; fi
 if $(test -e /.zshrc); then rm -r $HOME/.zshrc; fi
 if $(test -e /.oh-my-zsh); then yes | rm -r $HOME/.oh-my-zsh; fi
 
-echo "placing new files ..."
+echo "placing new files + dirs ..."
 cp $DOTFILES/.bashrc $HOME/.bashrc
 cp $DOTFILES/.vimrc $HOME/
 cp -r $DOTFILES/.vim $HOME/
 cp $DOTFILES/.tmux.conf $HOME/
 cp $DOTFILES/.zshrc $HOME/
 cp -r $DOTFILES/.oh-my-zsh $HOME/
+
+echo "installing Vim plugins ..."
+vim +PlugInstall +qall
+vim +PlugClean +qall
+vim +PlugInstall +qall
+
+echo "building YouCompleteMe ..."
+python $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --ts-completer
 
 echo ""
 echo ""
