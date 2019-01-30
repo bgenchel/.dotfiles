@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'crusoexia/vim-monokai'
 Plug 'bling/vim-airline'
 Plug 'davidhalter/jedi-vim'
-Plug 'valloric/youcompleteme'
+Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdcommenter'
