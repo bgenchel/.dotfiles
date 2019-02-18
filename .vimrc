@@ -32,6 +32,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
 Plug 'highwaynoise/chuck.vim'
+Plug 'vim-latex/vim-latex'
 " Plug 'munshkr/vim-tidal'
 " Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
 call plug#end()
@@ -419,3 +420,5 @@ let g:ctrlp_tjump_only_silent = 1
 " don't show tag name in results as it wastes space
 let g:ctrlp_tjump_skip_tag_name = 1
 
+" LaTEX Stuff " 
+let g:Tex_MultipleCompileFormats='pdf,bib,bibtex,pdf'
