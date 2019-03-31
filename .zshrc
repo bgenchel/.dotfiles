@@ -72,6 +72,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+function cleanVIM() {
+  echo "Cleaning ~/.vimbackup/"
+  rm -Rf ~/.vimbackup/*
+  echo "Cleaning ~/.vimswap/"
+  rm -Rf ~/.vimswap/*
+  echo "Cleaning ~/.vimviews/"
+  rm -Rf ~/.vimviews/*
+  echo "Cleaning ~/.vimundo/"
+  rm -Rf ~/.vimundo/*
+  echo "All done!"
+
+}
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
