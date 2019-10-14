@@ -7,11 +7,11 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="myagnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
 then 
-    . $HOME/anaconda/etc/profile.d/conda.sh
+    . $HOME/anaconda3/etc/profile.d/conda.sh
     alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
     export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -27,7 +27,7 @@ elif [[ $(uname) = "Linux" ]]; then
 fi
 
 # User configuration
-# Try to make a custom prompt with shortening but this doesn't actually work for some reason
+# Try to make a custom prompt with shortening
 setopt PROMPT_SUBST
 PROMPT='%{$(pwd|grep --color=always /)%${#PWD}G%} %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%#%f '
 
@@ -55,7 +55,6 @@ fi
 
 # If the custom.zsh file does not exist in the ZSH_CUSTOM dir yet, create it.
 # Place all system specific non-alias commands/instructions in this file.
-#
 if [[ ! -a $ZSH_CUSTOM/custom.zsh ]]; then
     touch $ZSH_CUSTOM/custom.zsh
 fi
@@ -133,3 +132,6 @@ function cleanVIM() {
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

@@ -31,10 +31,15 @@ if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
     git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 fi
 
-if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; then
-    echo "installing Meslo LG L for Powerline font ..."
-    curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
+if [ ! -d $DOTFILES/.oh-my-zsh/themes/powerlevel10k ]; then
+    echo "installing the powerlevel10k zsh theme ..."
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $DOTFILES/.oh-my-zsh/themes/powerlevel10k
 fi
+
+# if [ -z $(sudo find / -name "MesloLGRegularforPowerline.otf" | grep "Meslo") ]; then
+#     echo "installing Meslo LG L for Powerline font ..."
+#     curl -G https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20L%20Regular%20for%20Powerline.otf >> /Library/Fonts/MesloLGRegularforPowerline.otf
+# fi
 
 if [ ! -d $HOME/.fzf ]; then
     echo "installing fzf ..."
@@ -83,9 +88,8 @@ ln -s $DOTFILES/.oh-my-zsh $HOME/.oh-my-zsh
 
 echo ""
 echo ""
-echo "REMINDER - FOR ALL FEATURES TO WORK: "
+echo "FOR ALL FEATURES TO WORK: "
 echo "    - Set default shell to zsh (run: chsh -s /bin/zsh)"
-echo "    - Set terminal font to 'Meslo LG L for Powerline'"
 echo "    - Open Vim and run :PlugInstall"
 echo ""
 echo ""
