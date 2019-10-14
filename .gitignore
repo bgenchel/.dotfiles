@@ -6,3 +6,4 @@
 .oh-my-zsh/custom/aliases.zsh
 .oh-my-zsh/custom/custom.zsh
 *.log
+.DS_Store

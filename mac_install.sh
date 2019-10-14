@@ -15,7 +15,7 @@ if [ ! -d /Applications/MacVim.app ]; then
     echo "installing MacVim ..."
     brew install MacVim
     dir=$(sudo find / -name "MacVim.app" | grep "MacVim")
-    cp $dir /Applications/
+    cp -r $dir /Applications/
 fi
 
 # echo "setting default shell to zsh ..."
@@ -50,8 +50,8 @@ fi
 
 echo "installing YouCompleteMe supporting libraries..."
 # C-family Language Support
-yes | brew install clang
-yes | brew install build-essential cmake
+yes | brew install llvm
+yes | brew install cmake
 # Javascript / Typescript Support
 yes | brew install node
 yes | apt-get install npm
