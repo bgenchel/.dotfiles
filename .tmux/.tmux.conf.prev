@@ -10,7 +10,7 @@ bind-key b split-window
 
 # Solarized colors
 # default statusbar colors
-set-option -g status-style fg=yellow,bg=black,default
+set-option -g status-style fg=yellow,bg=grey,bright
 
 # default window title colors
 set-window-option -g window-status-style fg="#808080",bg=default,dim

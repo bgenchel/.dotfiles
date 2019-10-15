@@ -97,6 +97,11 @@ yes | $installer install node
 yes | $installer install npm
 yes | npm install -g typescript
 
+# Installing tmux extras
+echo "installing tmux extras ..."
+npm install -g tmux-cpu
+npm install -g tmux-mem
+
 echo "installing Vim plugins ..."
 vim +PlugInstall +qall
 vim +PlugClean +qall
