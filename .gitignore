@@ -1,10 +1,6 @@
 *un\~
 *.swp
 .vim/plugged/*
-.oh-my-zsh/custom/plugins/zsh-autosuggestions
-.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-.oh-my-zsh/custom/aliases.zsh
-.oh-my-zsh/custom/custom.zsh
-.oh-my-zsh/themes/powerlevel10k
+.oh-my-zsh/
 *.log
 .DS_Store

@@ -10,13 +10,10 @@ function git_prompt_info() {
 
 # Checks if working tree is dirty
 function parse_git_dirty() {
-  local STATUS=''
-  local FLAGS
-  FLAGS=('--porcelain')
+  local STATUS
+  local -a FLAGS
+  FLAGS=('--porcelain' '--ignore-submodules=dirty')
   if [[ "$(command git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
-    if [[ $POST_1_7_2_GIT -gt 0 ]]; then
-      FLAGS+='--ignore-submodules=dirty'
-    fi
     if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
       FLAGS+='--untracked-files=no'
     fi
@@ -76,16 +73,21 @@ function git_current_branch() {
 
 # Gets the number of commits ahead from remote
 function git_commits_ahead() {
-  if $(command git rev-parse --git-dir > /dev/null 2>&1); then
-    local COMMITS="$(git rev-list --count @{upstream}..HEAD)"
-    echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$COMMITS$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
+  if command git rev-parse --git-dir &>/dev/null; then
+    local commits="$(git rev-list --count @{upstream}..HEAD 2>/dev/null)"
+    if [[ -n "$commits" && "$commits" != 0 ]]; then
+      echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$commits$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
+    fi
   fi
 }
 
 # Gets the number of commits behind remote
 function git_commits_behind() {
-  if $(command git rev-parse --git-dir > /dev/null 2>&1); then
-    echo $(git rev-list --count HEAD..@{upstream})
+  if command git rev-parse --git-dir &>/dev/null; then
+    local commits="$(git rev-list --count HEAD..@{upstream} 2>/dev/null)"
+    if [[ -n "$commits" && "$commits" != 0 ]]; then
+      echo "$ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX$commits$ZSH_THEME_GIT_COMMITS_BEHIND_SUFFIX"
+    fi
   fi
 }
 
@@ -136,10 +138,14 @@ function git_prompt_status() {
     STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
   elif $(echo "$INDEX" | grep '^M  ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+  elif $(echo "$INDEX" | grep '^MM ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
   fi
   if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
   elif $(echo "$INDEX" | grep '^AM ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+  elif $(echo "$INDEX" | grep '^MM ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
   elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
@@ -160,38 +166,16 @@ function git_prompt_status() {
   if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
   fi
-  if $(echo "$INDEX" | grep '^## .*ahead' &> /dev/null); then
+  if $(echo "$INDEX" | grep '^## [^ ]\+ .*ahead' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_AHEAD$STATUS"
   fi
-  if $(echo "$INDEX" | grep '^## .*behind' &> /dev/null); then
+  if $(echo "$INDEX" | grep '^## [^ ]\+ .*behind' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_BEHIND$STATUS"
   fi
-  if $(echo "$INDEX" | grep '^## .*diverged' &> /dev/null); then
+  if $(echo "$INDEX" | grep '^## [^ ]\+ .*diverged' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_DIVERGED$STATUS"
   fi
   echo $STATUS
-}
-
-# Compares the provided version of git to the version installed and on path
-# Outputs -1, 0, or 1 if the installed version is less than, equal to, or
-# greater than the input version, respectively.
-function git_compare_version() {
-  local INPUT_GIT_VERSION INSTALLED_GIT_VERSION
-  INPUT_GIT_VERSION=(${(s/./)1})
-  INSTALLED_GIT_VERSION=($(command git --version 2>/dev/null))
-  INSTALLED_GIT_VERSION=(${(s/./)INSTALLED_GIT_VERSION[3]})
-
-  for i in {1..3}; do
-    if [[ $INSTALLED_GIT_VERSION[$i] -gt $INPUT_GIT_VERSION[$i] ]]; then
-      echo 1
-      return 0
-    fi
-    if [[ $INSTALLED_GIT_VERSION[$i] -lt $INPUT_GIT_VERSION[$i] ]]; then
-      echo -1
-      return 0
-    fi
-  done
-  echo 0
 }
 
 # Outputs the name of the current user
@@ -205,8 +189,3 @@ function git_current_user_name() {
 function git_current_user_email() {
   command git config user.email 2>/dev/null
 }
-
-# This is unlikely to change so make it all statically assigned
-POST_1_7_2_GIT=$(git_compare_version "1.7.2")
-# Clean up the namespace slightly by removing the checker function
-unfunction git_compare_version
