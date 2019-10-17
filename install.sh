@@ -32,11 +32,20 @@ if [ $(uname) == "Darwin" ]; then # Darwin is the kernal that Mac's commonly use
     chmod +x ./.install/mac.sh
     ./.install/mac.sh
     installer=$(which brew)
-else
+else 
     echo "${BOLD}***** Running Installation for Linux *****${NORMAL}"
     chmod +x ./.install/linux.sh
     ./.install/linux.sh
-    installer=$(which apt-get)
+    if [ $(which apt-get) ]; then
+        echo ">> found ${BOLD}apt-get${NORMAL}; this is probably a ${BOLD}Debian${NORMAL} based OS."
+        installer=$(which apt-get)
+    elif [ $(which yum) ]; then
+        echo ">> found ${BOLD}yum${NORMAL}; this is probably a ${BOLD}Red Hat${NORMAL} based OS."
+        installer=$(which yum)
+    else
+        echo ">> could not find a known package manager. Exiting ..."
+        exit 1
+    fi
 fi
 
 echo "installing tmux ..."
