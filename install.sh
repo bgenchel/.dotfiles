@@ -83,7 +83,7 @@ else
     echo "${CUSTOMTAB}${GREEN}powerlevel10k zsh theme is already installed.${NORMAL}"
 fi
 
-# echo "installing fzf ..."
+echo "installing fzf ..."
 if [ ! -d $HOME/.fzf ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
     ./$HOME/.fzf/install
