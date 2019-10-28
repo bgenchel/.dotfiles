@@ -9,9 +9,7 @@ set rtp+=~/.fzf
 
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
-Plug 'crusoexia/vim-monokai'
 Plug 'bling/vim-airline'
-" Plug 'davidhalter/jedi-vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'vim-scripts/a.vim'
@@ -33,13 +31,15 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
 Plug 'highwaynoise/chuck.vim'
 Plug 'vim-latex/vim-latex'
+" Plug 'vim-python/python-syntax'
+Plug 'sheerun/vim-polyglot'
 " Plug 'munshkr/vim-tidal'
 " Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
 call plug#end()
 
 filetype indent plugin on
 syntax enable
-let python_highlight_all = 1
+let g:python_highlight_all = 1
 
 set background=dark
 set t_Co=256  " 256 term coloring
@@ -225,41 +225,43 @@ map gd :bd<cr>
 
 " ******************** PLUGINS ********************
 "" ========== SYNTASTIC ==========
-"map sr :SyntasticCheck<CR>
-"noremap sr :SyntasticCheck<CR>
+map sr :SyntasticCheck<CR>
+noremap sr :SyntasticCheck<CR>
 
-"map se :Errors<CR>
-"noremap se :Errors<CR>
+map se :Errors<CR>
+noremap se :Errors<CR>
 
-"map sc :lclose<CR>
-"noremap sc :lclose<CR>
+map sc :lclose<CR>
+noremap sc :lclose<CR>
 
-"map st :SyntasticToggleMode<CR>
-"noremap st :SyntasticToggleMode<CR>
+map st :SyntasticToggleMode<CR>
+noremap st :SyntasticToggleMode<CR>
 
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"" let g:syntastic_debug = 1
-"let g:syntastic_enable_highlighting = 1
-"let g:syntastic_enable_balloons = 1
-"let g:syntastic_enable_signs = 1
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-"""" python
-"let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291,E226'
-"let g:syntastic_python_pylint_post_args='--disable=
-"    \missing-docstring,
-"    \trailing-whitespace,
-"    \too-many-arguments,
-"    \line-too-long,
-"    \wrong-import-order,
-"    \invalid-name,
-"    \too-few-public-methods,
-"    \bad-continuation'
+" let g:syntastic_debug = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_enable_balloons = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+""" python
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
+let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291,E226,E127,E128,W605,E401'
+let g:syntastic_python_pylint_post_args='--disable=
+    \missing-docstring,
+    \trailing-whitespace,
+    \too-many-arguments,
+    \line-too-long,
+    \wrong-import-order,
+    \invalid-name,
+    \too-few-public-methods,
+    \bad-continuation'
 ""================================
 
 " ========== YouCompleteMe ==========
