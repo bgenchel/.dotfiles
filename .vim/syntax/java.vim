@@ -1,14 +1,15 @@
-" Vim syntax file
-" Language:	Java
+" Vim syntax file " Language:	  Java
 " Maintainer:	Claudio Fleiner <claudio@fleiner.com>
-" URL:          https://github.com/fleiner/vim/blob/master/runtime/syntax/java.vim
-" Last Change:	2018 July 26
-
+" URL:		http://www.fleiner.com/vim/syntax/java.vim
+" Last Change:	2011 Dec 30
+" This file is modified by Devajit Asem <devajitasem@outloook.com>
 " Please check :help java.vim for comments on some of the options available.
 
-" quit when a syntax file was already loaded
+" Quit when a syntax file was already loaded
 if !exists("main_syntax")
-  if exists("b:current_syntax")
+  if version < 600
+    syntax clear
+  elseif exists("b:current_syntax")
     finish
   endif
   " we define it here so that included files can test for it
@@ -16,92 +17,90 @@ if !exists("main_syntax")
   syn region javaFold start="{" end="}" transparent fold
 endif
 
-let s:cpo_save = &cpo
-set cpo&vim
+" don't use standard HiLink, it will not work with included syntax files
+if version < 508
+  command! -nargs=+ JavaHiLink hi link <args>
+else
+  command! -nargs=+ JavaHiLink hi def link <args>
+endif
 
 " some characters that cannot be in a java program (outside a string)
 syn match javaError "[\\@`]"
-syn match javaError "<<<\|\.\.\|=>\|||=\|&&=\|\*\/"
-
+syn match javaError "<<<\|\.\.\|=>\|<>\|||=\|&&=\|[^-]->\|\*\/"
 syn match javaOK "\.\.\."
 
 " use separate name so that it can be deleted in javacc.vim
 syn match   javaError2 "#\|=<"
-hi def link javaError2 javaError
+JavaHiLink javaError2 javaError
+
+
 
 " keyword definitions
-syn keyword javaExternal	native package
+syn keyword javaExternal	native package main
 syn match javaExternal		"\<import\>\(\s\+static\>\)\?"
 syn keyword javaError		goto const
 syn keyword javaConditional	if else switch
 syn keyword javaRepeat		while for do
 syn keyword javaBoolean		true false
-syn keyword javaConstant	null
+syn keyword javaConstant	null String args
 syn keyword javaTypedef		this super
-syn keyword javaOperator	var new instanceof
+syn keyword javaOperator	new instanceof
 syn keyword javaType		boolean char byte short int long float double
 syn keyword javaType		void
+syn match   javaBraces  display    '[(\)\{\}\[\]\*\&\&&\||\+\=\-\_\.\,\;\:]'
 syn keyword javaStatement	return
 syn keyword javaStorageClass	static synchronized transient volatile final strictfp serializable
-syn keyword javaExceptions	throw try catch finally
+syn keyword javaExceptions	throw try catch finally System out print println in 
 syn keyword javaAssert		assert
 syn keyword javaMethodDecl	synchronized throws
-syn keyword javaClassDecl	extends implements interface
+syn keyword javaClassDecl	extends implements interface 
 " to differentiate the keyword class from MyClass.class we use a match here
 syn match   javaTypedef		"\.\s*\<class\>"ms=s+1
 syn keyword javaClassDecl	enum
 syn match   javaClassDecl	"^class\>"
 syn match   javaClassDecl	"[^.]\s*\<class\>"ms=s+1
-syn match   javaAnnotation	"@\([_$a-zA-Z][_$a-zA-Z0-9]*\.\)*[_$a-zA-Z][_$a-zA-Z0-9]*\>" contains=javaString
+syn match   javaAnnotation	"@\([_$a-zA-Z][_$a-zA-Z0-9]*\.\)*[_$a-zA-Z][_$a-zA-Z0-9]*\>"
 syn match   javaClassDecl	"@interface\>"
 syn keyword javaBranch		break continue nextgroup=javaUserLabelRef skipwhite
 syn match   javaUserLabelRef	"\k\+" contained
 syn match   javaVarArg		"\.\.\."
 syn keyword javaScopeDecl	public protected private abstract
 
-" Java Modules(Since Java 9, for "module-info.java" file)
-if fnamemodify(bufname("%"), ":t") == "module-info.java"
-    syn keyword javaModuleStorageClass	module transitive
-    syn keyword javaModuleStmt		open requires exports opens uses provides
-    syn keyword javaModuleExternal	to with
-    syn cluster javaTop add=javaModuleStorageClass,javaModuleStmt,javaModuleExternal
-endif
-
 if exists("java_highlight_java_lang_ids")
   let java_highlight_all=1
 endif
-if exists("java_highlight_all")  || exists("java_highlight_java")  || exists("java_highlight_java_lang")
+if exists("java_highlight_all")  || exists("java_highlight_java")  || exists("java_highlight_java_lang") 
   " java.lang.*
   syn match javaLangClass "\<System\>"
   syn keyword javaR_JavaLang NegativeArraySizeException ArrayStoreException IllegalStateException RuntimeException IndexOutOfBoundsException UnsupportedOperationException ArrayIndexOutOfBoundsException ArithmeticException ClassCastException EnumConstantNotPresentException StringIndexOutOfBoundsException IllegalArgumentException IllegalMonitorStateException IllegalThreadStateException NumberFormatException NullPointerException TypeNotPresentException SecurityException
   syn cluster javaTop add=javaR_JavaLang
   syn cluster javaClasses add=javaR_JavaLang
-  hi def link javaR_JavaLang javaR_Java
+  JavaHiLink javaR_JavaLang javaR_Java
   syn keyword javaC_JavaLang Process RuntimePermission StringKeySet CharacterData01 Class ThreadLocal ThreadLocalMap CharacterData0E Package Character StringCoding Long ProcessImpl ProcessEnvironment Short AssertionStatusDirectives 1PackageInfoProxy UnicodeBlock InheritableThreadLocal AbstractStringBuilder StringEnvironment ClassLoader ConditionalSpecialCasing CharacterDataPrivateUse StringBuffer StringDecoder Entry StringEntry WrappedHook StringBuilder StrictMath State ThreadGroup Runtime CharacterData02 MethodArray Object CharacterDataUndefined Integer Gate Boolean Enum Variable Subset StringEncoder Void Terminator CharsetSD IntegerCache CharacterCache Byte CharsetSE Thread SystemClassLoaderAction CharacterDataLatin1 StringValues StackTraceElement Shutdown ShortCache String ConverterSD ByteCache Lock EnclosingMethodInfo Math Float Value Double SecurityManager LongCache ProcessBuilder StringEntrySet Compiler Number UNIXProcess ConverterSE ExternalData CaseInsensitiveComparator CharacterData00 NativeLibrary
   syn cluster javaTop add=javaC_JavaLang
   syn cluster javaClasses add=javaC_JavaLang
-  hi def link javaC_JavaLang javaC_Java
+  JavaHiLink javaC_JavaLang javaC_Java
   syn keyword javaE_JavaLang IncompatibleClassChangeError InternalError UnknownError ClassCircularityError AssertionError ThreadDeath IllegalAccessError NoClassDefFoundError ClassFormatError UnsupportedClassVersionError NoSuchFieldError VerifyError ExceptionInInitializerError InstantiationError LinkageError NoSuchMethodError Error UnsatisfiedLinkError StackOverflowError AbstractMethodError VirtualMachineError OutOfMemoryError
   syn cluster javaTop add=javaE_JavaLang
   syn cluster javaClasses add=javaE_JavaLang
-  hi def link javaE_JavaLang javaE_Java
+  JavaHiLink javaE_JavaLang javaE_Java
   syn keyword javaX_JavaLang CloneNotSupportedException Exception NoSuchMethodException IllegalAccessException NoSuchFieldException Throwable InterruptedException ClassNotFoundException InstantiationException
   syn cluster javaTop add=javaX_JavaLang
   syn cluster javaClasses add=javaX_JavaLang
-  hi def link javaX_JavaLang javaX_Java
+  JavaHiLink javaX_JavaLang javaX_Java
 
-  hi def link javaR_Java javaR_
-  hi def link javaC_Java javaC_
-  hi def link javaE_Java javaE_
-  hi def link javaX_Java javaX_
-  hi def link javaX_		     javaExceptions
-  hi def link javaR_		     javaExceptions
-  hi def link javaE_		     javaExceptions
-  hi def link javaC_		     javaConstant
+  JavaHiLink javaR_Java javaR_
+  JavaHiLink javaC_Java javaC_
+  JavaHiLink javaE_Java javaE_
+  JavaHiLink javaX_Java javaX_
+  JavaHiLink javaX_		     javaExceptions
+  JavaHiLink javaR_		     javaExceptions
+  JavaHiLink javaE_		     javaExceptions
+  JavaHiLink javaC_		     javaConstant
 
   syn keyword javaLangObject clone equals finalize getClass hashCode
   syn keyword javaLangObject notify notifyAll toString wait
-  hi def link javaLangObject		     javaConstant
+  JavaHiLink javaLangObject		     javaConstant
   syn cluster javaTop add=javaLangObject
 endif
 
@@ -118,7 +117,7 @@ if exists("java_space_errors")
   endif
 endif
 
-syn region  javaLabelRegion	transparent matchgroup=javaLabel start="\<case\>" matchgroup=NONE end=":" contains=javaNumber,javaCharacter,javaString
+syn region  javaLabelRegion	transparent matchgroup=javaLabel start="\<case\>" matchgroup=NONE end=":" contains=javaNumber,javaCharacter
 syn match   javaUserLabel	"^\s*[_$a-zA-Z][_$a-zA-Z0-9_]*\s*:"he=e-1 contains=javaLabel
 syn keyword javaLabel		default
 
@@ -144,9 +143,9 @@ syn region  javaComment		 start="/\*"  end="\*/" contains=@javaCommentSpecial,ja
 syn match   javaCommentStar	 contained "^\s*\*[^/]"me=e-1
 syn match   javaCommentStar	 contained "^\s*\*$"
 syn match   javaLineComment	 "//.*" contains=@javaCommentSpecial2,javaTodo,@Spell
-hi def link javaCommentString javaString
-hi def link javaComment2String javaString
-hi def link javaCommentCharacter javaCharacter
+JavaHiLink javaCommentString javaString
+JavaHiLink javaComment2String javaString
+JavaHiLink javaCommentCharacter javaCharacter
 
 syn cluster javaTop add=javaComment,javaLineComment
 
@@ -163,7 +162,7 @@ if !exists("java_ignore_javadoc") && main_syntax != 'jsp'
   syn region  javaDocComment	start="/\*\*"  end="\*/" keepend contains=javaCommentTitle,@javaHtml,javaDocTags,javaDocSeeTag,javaTodo,@Spell
   syn region  javaCommentTitle	contained matchgroup=javaDocComment start="/\*\*"   matchgroup=javaCommentTitle keepend end="\.$" end="\.[ \t\r<&]"me=e-1 end="[^{]@"me=s-2,he=s-1 end="\*/"me=s-1,he=s-1 contains=@javaHtml,javaCommentStar,javaTodo,@Spell,javaDocTags,javaDocSeeTag
 
-  syn region javaDocTags	 contained start="{@\(code\|link\|linkplain\|inherit[Dd]oc\|doc[rR]oot\|value\)" end="}"
+  syn region javaDocTags	 contained start="{@\(link\|linkplain\|inherit[Dd]oc\|doc[rR]oot\|value\)" end="}"
   syn match  javaDocTags	 contained "@\(param\|exception\|throws\|since\)\s\+\S\+" contains=javaDocParam
   syn match  javaDocParam	 contained "\s\S\+"
   syn match  javaDocTags	 contained "@\(version\|author\|return\|deprecated\|serial\|serialField\|serialData\)\>"
@@ -185,10 +184,10 @@ syn region  javaString		start=+"+ end=+"+ end=+$+ contains=javaSpecialChar,javaS
 syn match   javaCharacter	 "'[^']*'" contains=javaSpecialChar,javaSpecialCharError
 syn match   javaCharacter	 "'\\''" contains=javaSpecialChar
 syn match   javaCharacter	 "'[^\\]'"
-syn match   javaNumber		 "\<\(0[bB][0-1]\+\|0[0-7]*\|0[xX]\x\+\|\d\(\d\|_\d\)*\)[lL]\=\>"
-syn match   javaNumber		 "\(\<\d\(\d\|_\d\)*\.\(\d\(\d\|_\d\)*\)\=\|\.\d\(\d\|_\d\)*\)\([eE][-+]\=\d\(\d\|_\d\)*\)\=[fFdD]\="
-syn match   javaNumber		 "\<\d\(\d\|_\d\)*[eE][-+]\=\d\(\d\|_\d\)*[fFdD]\=\>"
-syn match   javaNumber		 "\<\d\(\d\|_\d\)*\([eE][-+]\=\d\(\d\|_\d\)*\)\=[fFdD]\>"
+syn match   javaNumber		 "\<\(0[0-7]*\|0[xX]\x\+\|\d\+\)[lL]\=\>"
+syn match   javaNumber		 "\(\<\d\+\.\d*\|\.\d\+\)\([eE][-+]\=\d\+\)\=[fFdD]\="
+syn match   javaNumber		 "\<\d\+[eE][-+]\=\d\+[fFdD]\=\>"
+syn match   javaNumber		 "\<\d\+\([eE][-+]\=\d\+\)\=[fFdD]\>"
 
 " unicode characters
 syn match   javaSpecial "\\u\d\{4\}"
@@ -197,21 +196,19 @@ syn cluster javaTop add=javaString,javaCharacter,javaNumber,javaSpecial,javaStri
 
 if exists("java_highlight_functions")
   if java_highlight_functions == "indent"
-    syn match  javaFuncDef "^\(\t\| \{8\}\)[_$a-zA-Z][_$a-zA-Z0-9_. \[\]<>]*([^-+*/]*)" contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses,javaAnnotation
-    syn region javaFuncDef start=+^\(\t\| \{8\}\)[$_a-zA-Z][$_a-zA-Z0-9_. \[\]<>]*([^-+*/]*,\s*+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses,javaAnnotation
-    syn match  javaFuncDef "^  [$_a-zA-Z][$_a-zA-Z0-9_. \[\]<>]*([^-+*/]*)" contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses,javaAnnotation
-    syn region javaFuncDef start=+^  [$_a-zA-Z][$_a-zA-Z0-9_. \[\]<>]*([^-+*/]*,\s*+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses,javaAnnotation
+    syn match  javaFuncDef "^\(\t\| \{8\}\)[_$a-zA-Z][_$a-zA-Z0-9_. \[\]]*([^-+*/()]*)" contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses
+    syn region javaFuncDef start=+^\(\t\| \{8\}\)[$_a-zA-Z][$_a-zA-Z0-9_. \[\]]*([^-+*/()]*,\s*+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses
+    syn match  javaFuncDef "^  [$_a-zA-Z][$_a-zA-Z0-9_. \[\]]*([^-+*/()]*)" contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses
+    syn region javaFuncDef start=+^  [$_a-zA-Z][$_a-zA-Z0-9_. \[\]]*([^-+*/()]*,\s*+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,@javaClasses
   else
     " This line catches method declarations at any indentation>0, but it assumes
     " two things:
     "	1. class names are always capitalized (ie: Button)
     "	2. method names are never capitalized (except constructors, of course)
-    "syn region javaFuncDef start=+^\s\+\(\(public\|protected\|private\|static\|abstract\|final\|native\|synchronized\)\s\+\)*\(\(void\|boolean\|char\|byte\|short\|int\|long\|float\|double\|\([A-Za-z_][A-Za-z0-9_$]*\.\)*[A-Z][A-Za-z0-9_$]*\)\(<[^>]*>\)\=\(\[\]\)*\s\+[a-z][A-Za-z0-9_$]*\|[A-Z][A-Za-z0-9_$]*\)\s*([^0-9]+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,javaComment,javaLineComment,@javaClasses
-    syn region javaFuncDef start=+^\s\+\(\(public\|protected\|private\|static\|abstract\|final\|native\|synchronized\)\s\+\)*\(<.*>\s\+\)\?\(\(void\|boolean\|char\|byte\|short\|int\|long\|float\|double\|\([A-Za-z_][A-Za-z0-9_$]*\.\)*[A-Z][A-Za-z0-9_$]*\)\(<[^(){}]*>\)\=\(\[\]\)*\s\+[a-z][A-Za-z0-9_$]*\|[A-Z][A-Za-z0-9_$]*\)\s*(+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,javaComment,javaLineComment,@javaClasses,javaAnnotation
+    syn region javaFuncDef start=+^\s\+\(\(public\|protected\|private\|static\|abstract\|final\|native\|synchronized\)\s\+\)*\(\(void\|boolean\|char\|byte\|short\|int\|long\|float\|double\|\([A-Za-z_][A-Za-z0-9_$]*\.\)*[A-Z][A-Za-z0-9_$]*\)\(<[^>]*>\)\=\(\[\]\)*\s\+[a-z][A-Za-z0-9_$]*\|[A-Z][A-Za-z0-9_$]*\)\s*([^0-9]+ end=+)+ contains=javaScopeDecl,javaType,javaStorageClass,javaComment,javaLineComment,@javaClasses
   endif
-  syn match javaLambdaDef "[a-zA-Z_][a-zA-Z0-9_]*\s*->"
   syn match  javaBraces  "[{}]"
-  syn cluster javaTop add=javaFuncDef,javaBraces,javaLambdaDef
+  syn cluster javaTop add=javaFuncDef,javaBraces
 endif
 
 if exists("java_highlight_debug")
@@ -239,46 +236,44 @@ if exists("java_highlight_debug")
 
   syn cluster javaTop add=javaDebug
 
-  hi def link javaDebug		 Debug
-  hi def link javaDebugString		 DebugString
-  hi def link javaDebugStringError	 javaError
-  hi def link javaDebugType		 DebugType
-  hi def link javaDebugBoolean		 DebugBoolean
-  hi def link javaDebugNumber		 Debug
-  hi def link javaDebugSpecial		 DebugSpecial
-  hi def link javaDebugSpecialCharacter DebugSpecial
-  hi def link javaDebugCharacter	 DebugString
-  hi def link javaDebugParen		 Debug
+  if version >= 508 || !exists("did_c_syn_inits")
+    JavaHiLink javaDebug		 Debug
+    JavaHiLink javaDebugString		 DebugString
+    JavaHiLink javaDebugStringError	 javaError
+    JavaHiLink javaDebugType		 DebugType
+    JavaHiLink javaDebugBoolean		 DebugBoolean
+    JavaHiLink javaDebugNumber		 Debug
+    JavaHiLink javaDebugSpecial		 DebugSpecial
+    JavaHiLink javaDebugSpecialCharacter DebugSpecial
+    JavaHiLink javaDebugCharacter	 DebugString
+    JavaHiLink javaDebugParen		 Debug
 
-  hi def link DebugString		 String
-  hi def link DebugSpecial		 Special
-  hi def link DebugBoolean		 Boolean
-  hi def link DebugType		 Type
+    JavaHiLink DebugString		 String
+    JavaHiLink DebugSpecial		 Special
+    JavaHiLink DebugBoolean		 Boolean
+    JavaHiLink DebugType		 Type
+	JavaHiLink javaBraces       Arithmetics
+  endif
 endif
 
 if exists("java_mark_braces_in_parens_as_errors")
   syn match javaInParen		 contained "[{}]"
-  hi def link javaInParen	javaError
+  JavaHiLink javaInParen	javaError
   syn cluster javaTop add=javaInParen
 endif
 
 " catch errors caused by wrong parenthesis
-syn region  javaParenT	transparent matchgroup=javaParen  start="(" end=")" contains=@javaTop,javaParenT1
+syn region  javaParenT	transparent matchgroup=javaParen  start="("  end=")" contains=@javaTop,javaParenT1
 syn region  javaParenT1 transparent matchgroup=javaParen1 start="(" end=")" contains=@javaTop,javaParenT2 contained
 syn region  javaParenT2 transparent matchgroup=javaParen2 start="(" end=")" contains=@javaTop,javaParenT  contained
 syn match   javaParenError	 ")"
 " catch errors caused by wrong square parenthesis
-syn region  javaParenT	transparent matchgroup=javaParen  start="\[" end="\]" contains=@javaTop,javaParenT1
+syn region  javaParenT	transparent matchgroup=javaParen  start="\["  end="\]" contains=@javaTop,javaParenT1
 syn region  javaParenT1 transparent matchgroup=javaParen1 start="\[" end="\]" contains=@javaTop,javaParenT2 contained
 syn region  javaParenT2 transparent matchgroup=javaParen2 start="\[" end="\]" contains=@javaTop,javaParenT  contained
 syn match   javaParenError	 "\]"
 
-hi def link javaParenError	javaError
-
-if exists("java_highlight_functions")
-   syn match javaLambdaDef "([a-zA-Z0-9_<>\[\], \t]*)\s*->"
-   " needs to be defined after the parenthesis error catcher to work
-endif
+JavaHiLink javaParenError	javaError
 
 if !exists("java_minlines")
   let java_minlines = 10
@@ -286,61 +281,61 @@ endif
 exec "syn sync ccomment javaComment minlines=" . java_minlines
 
 " The default highlighting.
-hi def link javaLambdaDef		Function
-hi def link javaFuncDef		Function
-hi def link javaVarArg			Function
-hi def link javaBraces			Function
-hi def link javaBranch			Conditional
-hi def link javaUserLabelRef		javaUserLabel
-hi def link javaLabel			Label
-hi def link javaUserLabel		Label
-hi def link javaConditional		Conditional
-hi def link javaRepeat			Repeat
-hi def link javaExceptions		Exception
-hi def link javaAssert			Statement
-hi def link javaStorageClass		StorageClass
-hi def link javaMethodDecl		javaStorageClass
-hi def link javaClassDecl		javaStorageClass
-hi def link javaScopeDecl		javaStorageClass
+if version >= 508 || !exists("did_java_syn_inits")
+  if version < 508
+    let did_java_syn_inits = 1
+  endif
+  JavaHiLink javaFuncDef		Function
+  JavaHiLink javaVarArg			Function
+  JavaHiLink javaBraces			Function
+  JavaHiLink javaBranch			Conditional
+  JavaHiLink javaUserLabelRef		javaUserLabel
+  JavaHiLink javaLabel			Label
+  JavaHiLink javaUserLabel		Label
+  JavaHiLink javaConditional		Conditional
+  JavaHiLink javaRepeat			Repeat
+  JavaHiLink javaExceptions		Exception
+  JavaHiLink javaAssert			Statement
+  JavaHiLink javaStorageClass		StorageClass
+  JavaHiLink javaMethodDecl		javaStorageClass
+  JavaHiLink javaClassDecl		javaStorageClass
+  JavaHiLink javaScopeDecl		javaStorageClass
+  JavaHiLink javaBoolean		Boolean
+  JavaHiLink javaSpecial		Special
+  JavaHiLink javaSpecialError		Error
+  JavaHiLink javaBraces       Arithmetics
+  JavaHiLink javaSpecialCharError	Error
+  JavaHiLink javaString			String
+  JavaHiLink javaCharacter		Character
+  JavaHiLink javaSpecialChar		SpecialChar
+  JavaHiLink javaNumber			Number
+  JavaHiLink javaError			Error
+  JavaHiLink javaStringError		Error
+  JavaHiLink javaStatement		Statement
+  JavaHiLink javaOperator		Operator
+  JavaHiLink javaComment		Comment
+  JavaHiLink javaDocComment		Comment
+  JavaHiLink javaLineComment		Comment
+  JavaHiLink javaConstant		Constant
+  JavaHiLink javaTypedef		Typedef
+  JavaHiLink javaTodo			Todo
+  JavaHiLink javaAnnotation		PreProc
 
-hi def link javaBoolean		Boolean
-hi def link javaSpecial		Special
-hi def link javaSpecialError		Error
-hi def link javaSpecialCharError	Error
-hi def link javaString			String
-hi def link javaCharacter		Character
-hi def link javaSpecialChar		SpecialChar
-hi def link javaNumber			Number
-hi def link javaError			Error
-hi def link javaStringError		Error
-hi def link javaStatement		Statement
-hi def link javaOperator		Operator
-hi def link javaComment		Comment
-hi def link javaDocComment		Comment
-hi def link javaLineComment		Comment
-hi def link javaConstant		Constant
-" hi def link javaTypedef		Typedef
-hi def link javaTodo			Todo
-hi def link javaAnnotation		PreProc
+  JavaHiLink javaCommentTitle		SpecialComment
+  JavaHiLink javaDocTags		Special
+  JavaHiLink javaDocParam		Function
+  JavaHiLink javaDocSeeTagParam		Function
+  JavaHiLink javaCommentStar		javaComment
 
-hi def link javaCommentTitle		SpecialComment
-hi def link javaDocTags		Special
-hi def link javaDocParam		Function
-hi def link javaDocSeeTagParam		Function
-hi def link javaCommentStar		javaComment
+  JavaHiLink javaType			Type
+  JavaHiLink javaExternal		Include
 
-hi def link javaType			Type
-hi def link javaExternal		Include
-
-hi def link htmlComment		Special
-hi def link htmlCommentPart		Special
-hi def link javaSpaceError		Error
-
-if fnamemodify(bufname("%"), ":t") == "module-info.java"
-    hi def link javaModuleStorageClass	StorageClass
-    hi def link javaModuleStmt		Statement
-    hi def link javaModuleExternal	Include
+  JavaHiLink htmlComment		Special
+  JavaHiLink htmlCommentPart		Special
+  JavaHiLink javaSpaceError		Error
 endif
+
+delcommand JavaHiLink
 
 let b:current_syntax = "java"
 
@@ -349,9 +344,5 @@ if main_syntax == 'java'
 endif
 
 let b:spell_options="contained"
-let &cpo = s:cpo_save
-unlet s:cpo_save
-
-hi javaTypedef term=italic cterm=NONE ctermfg=LightGreen ctermbg=NONE gui=bold guifg=#60ff60 guibg=NONE
 
 " vim: ts=8
