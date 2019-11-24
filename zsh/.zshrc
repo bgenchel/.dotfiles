@@ -13,7 +13,7 @@ if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
 then 
     if [[ -a $HOME/anaconda ]]; then
         . $HOME/anaconda/etc/profile.d/conda.sh
-    elif [[ -a $HOME/anaconda3 ]]
+    elif [[ -a $HOME/anaconda3 ]]; then
         . $HOME/anaconda3/etc/profile.d/conda.sh
     fi
 
