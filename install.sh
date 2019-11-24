@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
 if which tput >/dev/null 2>&1; then
@@ -23,7 +25,7 @@ fi
 export CUSTOMTAB='    '
 
 export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/.oh-my-zsh
+export ZSH=$DOTFILES/zsh/.oh-my-zsh
 export ZSH_CUSTOM=$ZSH/custom
 
 
@@ -78,7 +80,7 @@ fi
 
 echo "installing the powerlevel10k zsh theme ..."
 if [ ! -d $ZSH/themes/powerlevel10k ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $DOTFILES/.oh-my-zsh/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/powerlevel10k
 else
     echo "${CUSTOMTAB}${GREEN}powerlevel10k zsh theme is already installed.${NORMAL}"
 fi
@@ -117,7 +119,7 @@ vim +PlugClean +qall
 vim +PlugInstall +qall
 
 echo "building YouCompleteMe ..."
-python $DOTFILES/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
+python $DOTFILES/vim/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
 
 chmod +x ./refresh.sh
 ./refresh.sh
