@@ -16,6 +16,7 @@ then
     elif [[ -a $HOME/anaconda3 ]]; then
         . $HOME/anaconda3/etc/profile.d/conda.sh
     fi
+    conda activate
 
     alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
 
