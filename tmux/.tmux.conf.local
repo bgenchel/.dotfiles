@@ -55,7 +55,7 @@ tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
 tmux_conf_theme_focused_pane_fg='default'
-tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
+tmux_conf_theme_focused_pane_bg='blue'               # light blue
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -63,7 +63,7 @@ tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border='black'                   # gray
+tmux_conf_theme_pane_border='#999999'                   # gray
 tmux_conf_theme_pane_active_border='blue'            # light blue
 
 # pane indicator colours
@@ -87,7 +87,7 @@ tmux_conf_theme_mode_attr='bold'
 
 # status line style
 tmux_conf_theme_status_fg='#8a8a8a'                     # light gray
-tmux_conf_theme_status_bg='#080808'                     # dark gray
+tmux_conf_theme_status_bg='#2a2a2a' #'#080808'                     # dark gray
 tmux_conf_theme_status_attr='none'
 
 # terminal title
@@ -179,16 +179,16 @@ tmux_conf_theme_right_separator_sub='|'
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=' << @#{username}#{root} >> | [ ❐  #S ] '
+tmux_conf_theme_status_left=' < @#{username}#{root} >| [ #S ] '
 # status left style
 tmux_conf_theme_status_left_fg='blue,yellow'  # black, white , white
 tmux_conf_theme_status_left_bg='default,default'  # yellow, pink, white blue
 tmux_conf_theme_status_left_attr='none,none'
 
 # tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
-tmux_conf_theme_status_right=' #{prefix}#{pairing}#{synchronized} cpu: #(/usr/local/bin/tmux-cpu --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]") | mem: #(/usr/local/bin/tmux-mem --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]") | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | %a %l:%M%p | %Y-%m-%d '
+tmux_conf_theme_status_right=' #{prefix}#{pairing}#{synchronized}  #(/usr/local/bin/tmux-cpu --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]")|  #(/usr/local/bin/tmux-mem --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]")| ↑#{?uptime_y,#{uptime_y}y,} #{?uptime_d,#{uptime_d}d,} #{?uptime_h,#{uptime_h}h,}| %a %H:%M| %Y-%m-%d '
 # status right style
-tmux_conf_theme_status_right_fg='white,white,red,blue,white' # light gray, white, black
+tmux_conf_theme_status_right_fg='white,white,red,white,blue' # light gray, white, black
 tmux_conf_theme_status_right_bg='default,default,default,default,default' # dark gray, red, white
 tmux_conf_theme_status_right_attr='none,none,none,none,none'
 
