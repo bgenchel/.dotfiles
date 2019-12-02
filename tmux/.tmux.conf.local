@@ -87,7 +87,7 @@ tmux_conf_theme_mode_attr='bold'
 
 # status line style
 tmux_conf_theme_status_fg='#8a8a8a'                     # light gray
-tmux_conf_theme_status_bg='#2a2a2a' #'#080808'                     # dark gray
+tmux_conf_theme_status_bg='#272727' #'#080808'                     # dark gray
 tmux_conf_theme_status_attr='none'
 
 # terminal title
