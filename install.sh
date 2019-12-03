@@ -113,16 +113,16 @@ echo "installing tmux extras ..."
 npm install -g tmux-cpu
 npm install -g tmux-mem
 
+chmod +x $DOTFILES/refresh.sh
+$DOTFILES/refresh.sh
+
 echo "installing Vim plugins ..."
 vim +PlugInstall +qall
 vim +PlugClean +qall
 vim +PlugInstall +qall
 
 echo "building YouCompleteMe ..."
-python $DOTFILES/vim/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
-
-chmod +x ./refresh.sh
-./refresh.sh
+/user/bin/python $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
 
 echo ""
 echo ""
