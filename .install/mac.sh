@@ -7,6 +7,13 @@ else
     echo "${CUSTOMTAB}${GREEN}Homebrew is already installed.${NORMAL}"
 fi
 
+echo "installing Brew Python ..."
+if (brew list python &> /dev/null); then
+    brew install python
+else
+    echo "${CUSTOMTAB}${GREEN}Brew Python is already installed.${NORMAL}"
+fi
+
 echo "installing MacVim ..."
 if [ ! -d /Applications/MacVim.app ]; then
     brew install MacVim

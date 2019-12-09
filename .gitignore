@@ -1,6 +1,7 @@
 *un\~
 *.swp
-vim/.vim/plugged/*
 zsh/.oh-my-zsh/
 *.log
 .DS_Store
+vim/.vim/autoload
+vim/.vim/plugged/*

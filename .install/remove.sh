@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "clearing out dotfiles ..."
 if $(test -e $HOME/.bashrc ); then rm -r $HOME/.bashrc; fi
 if $(test -e $HOME/.vimrc ); then rm -r $HOME/.vimrc; fi
 if $(test -e $HOME/.vim ); then yes | rm -r $HOME/.vim; fi

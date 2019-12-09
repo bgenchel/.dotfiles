@@ -31,13 +31,11 @@ export ZSH_CUSTOM=$ZSH/custom
 
 if [ $(uname) == "Darwin" ]; then # Darwin is the kernal that Mac's commonly use
     echo "${BOLD}***** Running Installation for Mac *****${NORMAL}"
-    chmod +x ./.install/mac.sh
-    ./.install/mac.sh
+    chmod +x $DOTFILES/.install/mac.sh && $DOTFILES/.install/mac.sh
     installer=$(which brew)
 else 
     echo "${BOLD}***** Running Installation for Linux *****${NORMAL}"
-    chmod +x ./.install/linux.sh
-    ./.install/linux.sh
+    chmod +x $DOTFILES/.install/linux.sh && $DOTFILES/.install/linux.sh
     if [ $(which apt-get) ]; then
         echo ">> found ${BOLD}apt-get${NORMAL}; this is probably a ${BOLD}Debian${NORMAL} based OS."
         installer=$(which apt-get)
@@ -99,6 +97,11 @@ else
     echo "${CUSTOMTAB}${GREEN}fzf is already installed.${NORMAL}"
 fi
 
+echo "Installing Vim-Plug ..."
+curl -fLo $DOTFILES/vim/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
 echo "installing YouCompleteMe supporting libraries..."
 # C-family Language Support
 yes | $installer install llvm
@@ -113,16 +116,8 @@ echo "installing tmux extras ..."
 npm install -g tmux-cpu
 npm install -g tmux-mem
 
-chmod +x $DOTFILES/refresh.sh
-$DOTFILES/refresh.sh
-
-echo "installing Vim plugins ..."
-vim +PlugInstall +qall
-vim +PlugClean +qall
-vim +PlugInstall +qall
-
-echo "building YouCompleteMe ..."
-/user/bin/python $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
+# Place files and finish install
+chmod +x $DOTFILES/refresh.sh && $DOTFILES/refresh.sh 
 
 echo ""
 echo ""
