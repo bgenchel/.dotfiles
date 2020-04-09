@@ -129,7 +129,7 @@ chmod +x $DOTFILES/refresh.sh && $DOTFILES/refresh.sh
 echo ""
 echo ""
 echo "FOR ALL FEATURES TO WORK: "
-echo "    - Set default shell to zsh (run: chsh -s /bin/zsh)"
+echo "    - Set default shell to zsh (run \`chsh -s /bin/zsh\` or edit /etc/passwd)"
 echo "    - Quit and restart terminal "
 echo ""
 echo ""
