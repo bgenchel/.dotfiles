@@ -25,8 +25,9 @@ fi
 export CUSTOMTAB='    '
 
 export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/zsh/.oh-my-zsh
-export ZSH_CUSTOM=$ZSH/custom
+export ZSH=$DOTFILES/zsh
+export OM_ZSH=$ZSH/.oh-my-zsh
+export OM_ZSH_CUSTOM=$OM_ZSH/custom
 
 
 if [ $(uname) == "Darwin" ]; then # Darwin is the kernal that Mac's commonly use
@@ -60,6 +61,12 @@ if [ ! -d $ZSH ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 else
     echo "${CUSTOMTAB}${GREEN}.oh-my-zsh is already installed.${NORMAL}"
+fi
+
+echo "adding custom files to oh-my-zsh ..."
+cp $ZSH/aliases.zsh $OM_ZSH_CUSTOM  
+if [ ! -f $OM_ZSH_CUSTOM/custom.zsh ]; then
+    touch $OM_ZSH_CUSTOM/custom.zsh
 fi
 
 echo "installing zsh syntax highlighting ..."

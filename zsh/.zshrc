@@ -22,10 +22,11 @@ then
 
     export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
     # The next line updates PATH for the Google Cloud SDK.
-    if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/path.zsh.inc'; fi
+    if [ -f "$HOME/.ssh/y/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/path.zsh.inc"; fi
     # The next line enables shell command completion for gcloud.
-    if [ -f '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/benjamingenchel/.ssh/y/google-cloud-sdk/completion.zsh.inc'; fi
+    if [ -f "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc"; fi
 
     export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
     export DISPLAY=":0" 
