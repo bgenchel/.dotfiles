@@ -4,6 +4,7 @@
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias la="ls -la"
 alias yrm="yes | rm -r"
 
 alias tmn="tmux new -s"
