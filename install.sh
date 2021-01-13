@@ -25,9 +25,9 @@ fi
 export CUSTOMTAB='    '
 
 export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/zsh
-export OM_ZSH=$ZSH/.oh-my-zsh
-export OM_ZSH_CUSTOM=$OM_ZSH/custom
+export DF_ZSH=$DOTFILES/zsh
+export DF_OM_ZSH=$DF_ZSH/.oh-my-zsh
+export DF_OM_ZSH_CUSTOM=$DF_OM_ZSH/custom
 
 
 if [ $(uname) == "Darwin" ]; then # Darwin is the kernal that Mac's commonly use
@@ -57,35 +57,42 @@ else
 fi
 
 echo "installing oh-my-zsh ..."
-if [ ! -d $ZSH ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+if [ ! -d $DF_OM_ZSH ]; then
+    ZSH=$DF_OM_ZSH sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 else
     echo "${CUSTOMTAB}${GREEN}.oh-my-zsh is already installed.${NORMAL}"
 fi
 
 echo "adding custom files to oh-my-zsh ..."
-cp $ZSH/aliases.zsh $OM_ZSH_CUSTOM  
-if [ ! -f $OM_ZSH_CUSTOM/custom.zsh ]; then
-    touch $OM_ZSH_CUSTOM/custom.zsh
+cp $DF_ZSH/aliases.zsh $DF_OM_ZSH_CUSTOM  
+if [ ! -f $DF_OM_ZSH_CUSTOM/custom.zsh ]; then
+    touch $DF_OM_ZSH_CUSTOM/custom.zsh
 fi
 
 echo "installing zsh syntax highlighting ..."
-if [ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+if [ ! -d $DF_OM_ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $DF_OM_ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 else
     echo "${CUSTOMTAB}${GREEN}zsh syntax highlighting is already installed.${NORMAL}"
 fi
 
 echo "installing zsh autosuggestions ..."
-if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
-    git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+if [ ! -d $DF_OM_ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
+    git clone git://github.com/zsh-users/zsh-autosuggestions $DF_OM_ZSH_CUSTOM/plugins/zsh-autosuggestions
 else
     echo "${CUSTOMTAB}${GREEN}zsh autosuggestions is already installed.${NORMAL}"
 fi
 
+echo "Installing powerlevel9k theme for zsh versions lower than 5.1 ..."
+if [ ! -d $DF_OM_ZSH/themes/powerlevel9k ]; then
+    git clone --depth=1 https://github.com/Powerlevel9k/powerlevel9k.git $DF_OM_ZSH/themes/powerlevel9k
+else
+    echo "${CUSTOMTAB}${GREEN}powerlevel10k zsh theme is already installed.${NORMAL}"
+fi
+
 echo "installing the powerlevel10k zsh theme ..."
-if [ ! -d $ZSH/themes/powerlevel10k ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/powerlevel10k
+if [ ! -d $DF_OM_ZSH/themes/powerlevel10k ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $DF_OM_ZSH/themes/powerlevel10k
 else
     echo "${CUSTOMTAB}${GREEN}powerlevel10k zsh theme is already installed.${NORMAL}"
 fi
