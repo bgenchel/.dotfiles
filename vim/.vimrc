@@ -31,8 +31,9 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
 Plug 'highwaynoise/chuck.vim'
 Plug 'vim-latex/vim-latex'
-" Plug 'vim-python/python-syntax'
 Plug 'sheerun/vim-polyglot'
+Plug 'quramy/tsuquyomi'
+" Plug 'vim-python/python-syntax'
 " Plug 'munshkr/vim-tidal'
 " Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
 call plug#end()

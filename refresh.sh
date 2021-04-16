@@ -39,4 +39,4 @@ if (python -c "import sys, os.path as op; sys.exit(0) if op.exists(op.join(sys.p
 fi
 
 wait
-$(which python) $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
+$(which python3) $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --tern-completer
