@@ -84,18 +84,16 @@ else
 fi
 
 echo "Installing powerlevel9k theme for zsh versions lower than 5.1 ..."
-if [ ! -d $DF_OM_ZSH/themes/powerlevel9k ]; then
-    git clone --depth=1 https://github.com/Powerlevel9k/powerlevel9k.git $DF_OM_ZSH/themes/powerlevel9k
-else
-    echo "${CUSTOMTAB}${GREEN}powerlevel10k zsh theme is already installed.${NORMAL}"
+if [ -d $DF_OM_ZSH/themes/powerlevel9k ]; then
+    rm -rf $DF_OM_ZSH/themes/powerlevel9k 
 fi
+git clone --depth=1 https://github.com/Powerlevel9k/powerlevel9k.git $DF_OM_ZSH/themes/powerlevel9k
 
-echo "installing the powerlevel10k zsh theme ..."
-if [ ! -d $DF_OM_ZSH/themes/powerlevel10k ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $DF_OM_ZSH/themes/powerlevel10k
-else
-    echo "${CUSTOMTAB}${GREEN}powerlevel10k zsh theme is already installed.${NORMAL}"
+echo "Installing the powerlevel10k zsh theme ..."
+if [ -d $DF_OM_ZSH/themes/powerlevel10k ]; then
+    rm -rf $DF_OM_ZSH/themes/powerlevel10k 
 fi
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $DF_OM_ZSH/themes/powerlevel10k
 
 echo "installing fzf ..."
 if [ ! -d $HOME/.fzf ]; then
@@ -114,7 +112,6 @@ fi
 echo "Installing Vim-Plug ..."
 curl -fLo $DOTFILES/vim/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 
 echo "installing YouCompleteMe supporting libraries..."
 # C-family Language Support
