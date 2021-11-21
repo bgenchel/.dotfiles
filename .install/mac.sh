@@ -14,6 +14,13 @@ else
     echo "${CUSTOMTAB}${GREEN}Brew Python is already installed.${NORMAL}"
 fi
 
+echo "installing Brew Go ..."
+if (brew list go &> /dev/null); then
+    brew install go
+else
+    echo "${CUSTOMTAB}${GREEN}Brew Go is already installed.${NORMAL}"
+fi
+
 echo "installing MacVim ..."
 if [ ! -d /Applications/MacVim.app ]; then
     brew install MacVim

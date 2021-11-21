@@ -10,7 +10,7 @@ set rtp+=~/.fzf
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'commit': '7b52253ee29c9f8ed812db409996767084eaeb99'}
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -33,6 +33,8 @@ Plug 'highwaynoise/chuck.vim'
 Plug 'vim-latex/vim-latex'
 Plug 'sheerun/vim-polyglot'
 Plug 'quramy/tsuquyomi'
+Plug 'quramy/vim-js-pretty-template'
+Plug 'leafgarland/typescript-vim'
 " Plug 'vim-python/python-syntax'
 " Plug 'munshkr/vim-tidal'
 " Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
