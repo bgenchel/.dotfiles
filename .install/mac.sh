@@ -29,3 +29,6 @@ if [ ! -d /Applications/MacVim.app ]; then
 else
     echo "${CUSTOMTAB}${GREEN}MacVim is already installed.${NORMAL}"
 fi
+
+brew install fzf
+$(brew --prefix)/opt/fzf/install

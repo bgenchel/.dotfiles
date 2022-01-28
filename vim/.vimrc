@@ -10,8 +10,9 @@ set rtp+=~/.fzf
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
-Plug 'Valloric/YouCompleteMe', {'commit': '7b52253ee29c9f8ed812db409996767084eaeb99'}
+Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+" Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
@@ -279,6 +280,8 @@ highlight link javaDocTags PreProc
 
 " ========== YouCompleteMe ==========
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/.ycm_extra_conf.py'
+let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
+let g:ycm_python_binary_path = 'python'
 " let g:loaded_youcompleteme = 1
 " ===================================
 
@@ -330,6 +333,7 @@ let g:airline_section_c=''
 " ========== Jedi-Vim ==========
 let g:jedi#use_splits_not_buffers="left"
 let g:jedi#popup_select_first=0
+" let jedi#force_py_version=3.9
 " ==============================
 
 " vim - notes directory

@@ -121,6 +121,8 @@ yes | $installer install cmake
 yes | $installer install node
 yes | $installer install npm
 yes | npm install -g typescript
+# Other
+yes | $installer install go
 
 # Installing tmux extras
 echo "installing tmux extras ..."
