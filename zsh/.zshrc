@@ -11,24 +11,26 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
 then 
-    if [[ -a $HOME/anaconda ]]; then
-        . $HOME/anaconda/etc/profile.d/conda.sh
-    elif [[ -a $HOME/anaconda3 ]]; then
-        . $HOME/anaconda3/etc/profile.d/conda.sh
-    fi
-    conda activate
+    # if [[ -a $HOME/anaconda ]]; then
+    #     . $HOME/anaconda/etc/profile.d/conda.sh
+    # elif [[ -a $HOME/anaconda3 ]]; then
+    #     . $HOME/anaconda3/etc/profile.d/conda.sh
+    # fi
+    # conda activate
 
-    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
-
-    export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+    export PATH=/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    alias python="/usr/local/bin/python3";
+    alias pip="/usr/local/bin/pip3";
+    alias vim="/usr/local/bin/vim";
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f "$HOME/.ssh/y/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/path.zsh.inc"; fi
     # The next line enables shell command completion for gcloud.
     if [ -f "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc"; fi
 
-    export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
+    export EDITOR="/usr/local/bin/vim"
     export DISPLAY=":0" 
 elif [[ $(uname) = "Linux" ]]; then
     export EDITOR=$(which vim)
@@ -97,6 +99,9 @@ function cleanVIM() {
 
 # Add custom scripts to path
 export PATH=$PATH:$HOME/.bin
+
+# Python Path
+export PYTHONPATH=/usr/local/bin/python:$PYTHONPATH
 
 # zshrc extra options
 source $HOME/.zshrc.extras

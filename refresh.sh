@@ -17,8 +17,8 @@ cp $DOTFILES/zsh/.zshrc.extras $HOME/
 cp $DOTFILES/zsh/.p10k.zsh $HOME/
 cp -r $DOTFILES/zsh/.oh-my-zsh $HOME/
 if $(test -e $HOME/.tmp/.oh-my-zsh/custom); then
-    rm -rf $HOME/.oh-my-zsh/custom
-    mv $HOME/.tmp/.oh-my-zsh/custom $HOME/.oh-my-zsh
+    rm -rf $HOME/.oh-my-zsh/custom/*.zsh
+    mv $HOME/.tmp/.oh-my-zsh/custom/*.zsh $HOME/.oh-my-zsh/custom/
 fi
 
 echo "installing Vim plugins ..."
@@ -28,15 +28,15 @@ wait && vim -c "PlugInstall" +qall
 
 wait
 echo "building YouCompleteMe ..."
-# Check if you're in a conda environment
-if (python -c "import sys, os.path as op; sys.exit(0) if op.exists(op.join(sys.prefix, 'conda-meta')) else sys.exit(1)"); then 
-    if [[ -a $HOME/anaconda ]]; then
-        . $HOME/anaconda/etc/profile.d/conda.sh
-    elif [[ -a $HOME/anaconda3 ]]; then
-        . $HOME/anaconda3/etc/profile.d/conda.sh
-    fi
-    conda deactivate
-fi
+# # Check if you're in a conda environment
+# if (python -c "import sys, os.path as op; sys.exit(0) if op.exists(op.join(sys.prefix, 'conda-meta')) else sys.exit(1)"); then 
+#     if [[ -a $HOME/anaconda ]]; then
+#         . $HOME/anaconda/etc/profile.d/conda.sh
+#     elif [[ -a $HOME/anaconda3 ]]; then
+#         . $HOME/anaconda3/etc/profile.d/conda.sh
+#     fi
+#     conda deactivate
+# fi
 
 wait
-$(which python3) $HOME/.vim/plugged/YouCompleteMe/install.py --system-libclang --clang-completer --ts-completer
+$(which python) $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --ts-completer

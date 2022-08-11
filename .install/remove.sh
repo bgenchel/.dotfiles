@@ -11,7 +11,7 @@ if $(test -e $HOME/.p10k.zsh); then rm -r $HOME/.p10k.zsh; fi
 if $(test -e $HOME/.oh-my-zsh); then 
     if $(test -e $HOME/.oh-my-zsh/custom); then
         mkdir -p $HOME/.tmp/.oh-my-zsh
-        mv $HOME/.oh-my-zsh/custom $HOME/.tmp/.oh-my-zsh/custom
+        mv $HOME/.oh-my-zsh/custom $HOME/.tmp/.oh-my-zsh
     fi
     yes | rm -r $HOME/.oh-my-zsh
 fi

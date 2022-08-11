@@ -34,6 +34,11 @@ if [ $(uname) == "Darwin" ]; then # Darwin is the kernal that Mac's commonly use
     echo "${BOLD}***** Running Installation for Mac *****${NORMAL}"
     chmod +x $DOTFILES/.install/mac.sh && $DOTFILES/.install/mac.sh
     installer=$(which brew)
+
+    brew install python3
+    sudo ln -s /opt/homebrew/bin/python3 /usr/local/bin/python3
+    sudo ln -s /opt/homebrew/bin/pip3 /usr/local/bin/pip3
+    sudo ln -s /opt/homebrew/bin/vim /usr/local/bin/vim
 else 
     echo "${BOLD}***** Running Installation for Linux *****${NORMAL}"
     chmod +x $DOTFILES/.install/linux.sh && $DOTFILES/.install/linux.sh
@@ -47,6 +52,7 @@ else
         echo ">> could not find a known package manager. Exiting ..."
         exit 1
     fi
+
 fi
 
 echo "installing tmux ..."

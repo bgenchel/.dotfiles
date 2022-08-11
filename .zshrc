@@ -18,7 +18,8 @@ then
     # fi
     # conda activate
 
-    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim";
+    export PATH=$PATH:/opt/homebrew/bin
+    alias vim="/opt/homebrew/bin/vim";
 
     export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -28,7 +29,7 @@ then
     # The next line enables shell command completion for gcloud.
     if [ -f "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc"; fi
 
-    export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
+    export EDITOR="/opt/homebrew/bin/vim"
     export DISPLAY=":0" 
 elif [[ $(uname) = "Linux" ]]; then
     export EDITOR=$(which vim)

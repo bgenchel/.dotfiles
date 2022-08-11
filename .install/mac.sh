@@ -2,7 +2,8 @@
 
 echo "installing Homebrew ..."
 if [ -z $(which brew) ]; then
-    /usr/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    $(which bash) -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    export PATH=/opt/homebrew/bin:$PATH
 else
     echo "${CUSTOMTAB}${GREEN}Homebrew is already installed.${NORMAL}"
 fi
@@ -21,14 +22,14 @@ else
     echo "${CUSTOMTAB}${GREEN}Brew Go is already installed.${NORMAL}"
 fi
 
-echo "installing MacVim ..."
-if [ ! -d /Applications/MacVim.app ]; then
-    brew install MacVim
-    dir=$(sudo find / -name "MacVim.app" | grep "MacVim")
-    cp -r $dir /Applications/
-else
-    echo "${CUSTOMTAB}${GREEN}MacVim is already installed.${NORMAL}"
-fi
+# echo "installing MacVim ..."
+# if [ ! -d /Applications/MacVim.app ]; then
+#    brew install MacVim
+#    dir=$(sudo find / -name "MacVim.app" | grep "MacVim")
+#    cp -r $dir /Applications/
+# else
+    # echo "${CUSTOMTAB}${GREEN}MacVim is already installed.${NORMAL}"
+# fi
 
 brew install fzf
 $(brew --prefix)/opt/fzf/install
