@@ -84,7 +84,7 @@ fi
 
 echo "installing zsh autosuggestions ..."
 if [ ! -d $DF_OM_ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
-    git clone git://github.com/zsh-users/zsh-autosuggestions $DF_OM_ZSH_CUSTOM/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git $DF_OM_ZSH_CUSTOM/plugins/zsh-autosuggestions
 else
     echo "${CUSTOMTAB}${GREEN}zsh autosuggestions is already installed.${NORMAL}"
 fi
