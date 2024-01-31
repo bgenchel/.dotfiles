@@ -105,3 +105,8 @@ export PYTHONPATH=/usr/local/bin/python:$PYTHONPATH
 
 # zshrc extra options
 source $HOME/.zshrc.extras
+
+# pyenv 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

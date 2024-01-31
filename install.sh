@@ -1,44 +1,17 @@
 #!/bin/bash
 
-# Use colors, but only if connected to a terminal, and that terminal
-# supports them.
-if which tput >/dev/null 2>&1; then
-  ncolors=$(tput colors)
-fi
-if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
-export RED="$(tput setaf 1)"
-export GREEN="$(tput setaf 2)"
-export YELLOW="$(tput setaf 3)"
-export BLUE="$(tput setaf 4)"
-export BOLD="$(tput bold)"
-export NORMAL="$(tput sgr0)"
-else
-export RED=""
-export GREEN=""
-export YELLOW=""
-export BLUE=""
-export BOLD=""
-export NORMAL=""
-fi
-
-# Custom tab
-export CUSTOMTAB='    '
-
 export DOTFILES=$HOME/.dotfiles
 export DF_ZSH=$DOTFILES/zsh
 export DF_OM_ZSH=$DF_ZSH/.oh-my-zsh
 export DF_OM_ZSH_CUSTOM=$DF_OM_ZSH/custom
 
+source $DOTFILES/.install/style.sh
 
 if [ $(uname) == "Darwin" ]; then # Darwin is the kernal that Mac's commonly use
     echo "${BOLD}***** Running Installation for Mac *****${NORMAL}"
-    chmod +x $DOTFILES/.install/mac.sh && $DOTFILES/.install/mac.sh
+    chmod +x $DOTFILES/.install/mac.sh && source $DOTFILES/.install/mac.sh
     installer=$(which brew)
 
-    brew install python3
-    sudo ln -s /opt/homebrew/bin/python3 /usr/local/bin/python3
-    sudo ln -s /opt/homebrew/bin/pip3 /usr/local/bin/pip3
-    sudo ln -s /opt/homebrew/bin/vim /usr/local/bin/vim
 else 
     echo "${BOLD}***** Running Installation for Linux *****${NORMAL}"
     chmod +x $DOTFILES/.install/linux.sh && $DOTFILES/.install/linux.sh
@@ -70,7 +43,7 @@ else
 fi
 
 echo "adding custom files to oh-my-zsh ..."
-cp $DF_ZSH/aliases.zsh $DF_OM_ZSH_CUSTOM  
+cp $DF_ZSH/aliases.zsh $DF_OM_ZSH_CUSTOM/
 if [ ! -f $DF_OM_ZSH_CUSTOM/custom.zsh ]; then
     touch $DF_OM_ZSH_CUSTOM/custom.zsh
 fi

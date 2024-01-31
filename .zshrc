@@ -18,18 +18,19 @@ then
     # fi
     # conda activate
 
-    export PATH=$PATH:/opt/homebrew/bin
-    alias vim="/opt/homebrew/bin/vim";
-
-    export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+    export PATH=/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    alias python="/usr/local/bin/python3";
+    alias pip="/usr/local/bin/pip3";
+    alias vim="/usr/local/bin/vim";
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f "$HOME/.ssh/y/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/path.zsh.inc"; fi
     # The next line enables shell command completion for gcloud.
     if [ -f "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/.ssh/y/google-cloud-sdk/completion.zsh.inc"; fi
 
-    export EDITOR="/opt/homebrew/bin/vim"
+    export EDITOR="/usr/local/bin/vim"
     export DISPLAY=":0" 
 elif [[ $(uname) = "Linux" ]]; then
     export EDITOR=$(which vim)
@@ -100,9 +101,17 @@ function cleanVIM() {
 export PATH=$PATH:$HOME/.bin
 
 # Python Path
-export PYTHONPATH=/usr/local/bin/python3:$PYTHONPATH
+export PYTHONPATH=/usr/local/bin/python:$PYTHONPATH
 
 # zshrc extra options
 source $HOME/.zshrc.extras
 
-source $HOME/.zshrc.amazon
+# pyenv 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# pipx
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"

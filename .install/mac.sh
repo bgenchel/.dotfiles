@@ -1,35 +1,34 @@
 #!/bin/bash
 
-echo "installing Homebrew ..."
+source ./style.sh
+
+echo "installing homebrew ..."
 if [ -z $(which brew) ]; then
     $(which bash) -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     export PATH=/opt/homebrew/bin:$PATH
+    echo $PATH
 else
-    echo "${CUSTOMTAB}${GREEN}Homebrew is already installed.${NORMAL}"
+    echo "${CUSTOMTAB}${GREEN}homebrew is already installed.${NORMAL}"
 fi
 
-echo "installing Brew Python ..."
-if (brew list python &> /dev/null); then
-    brew install python
-else
-    echo "${CUSTOMTAB}${GREEN}Brew Python is already installed.${NORMAL}"
-fi
+check_install_link_brew_package() {
+    local package_name="$1"
 
-echo "installing Brew Go ..."
-if (brew list go &> /dev/null); then
-    brew install go
-else
-    echo "${CUSTOMTAB}${GREEN}Brew Go is already installed.${NORMAL}"
-fi
+    echo "installing brew $package_name ..."
+    if (! brew list "$package_name" &> /dev/null); then
+        brew install "$package_name"
+    else
+        echo "${CUSTOMTAB}${GREEN}brew $package_name is already installed.${NORMAL}"
+    fi
 
-# echo "installing MacVim ..."
-# if [ ! -d /Applications/MacVim.app ]; then
-#    brew install MacVim
-#    dir=$(sudo find / -name "MacVim.app" | grep "MacVim")
-#    cp -r $dir /Applications/
-# else
-    # echo "${CUSTOMTAB}${GREEN}MacVim is already installed.${NORMAL}"
-# fi
+    sudo ln -s /opt/homebrew/bin/$package_name /usr/local/bin/$package_name
+}
 
-brew install fzf
+check_install_link_brew_package "python"
+check_install_link_brew_package "python3"
+check_install_link_brew_package "pyenv"
+check_install_link_brew_package "pipx"
+check_install_link_brew_package "go"
+check_install_link_brew_package "vim"
+check_install_link_brew_package "fzf"
 $(brew --prefix)/opt/fzf/install

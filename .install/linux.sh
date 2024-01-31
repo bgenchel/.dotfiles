@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./style.sh
+
 echo "installing zsh ..."
 if [ -z $(which zsh) ]; then
     yes | apt-get install zsh
