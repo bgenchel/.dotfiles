@@ -27,6 +27,7 @@ check_install_link_brew_package() {
 check_install_link_brew_package "python"
 check_install_link_brew_package "python3"
 check_install_link_brew_package "pyenv"
+check_install_link_brew_package "pyenv-virtualenv"
 check_install_link_brew_package "pipx"
 check_install_link_brew_package "go"
 check_install_link_brew_package "vim"
