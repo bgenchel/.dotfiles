@@ -236,7 +236,7 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{username}
 #     - #{username_ssh}
 
-tmux_conf_theme_status_left='  #($(which tmux-cpu) --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]")|  #($(which tmux-mem) --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]")| [ #S ] '
+tmux_conf_theme_status_left='  #($(which tmux-cpu) --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]")|  #($(which tmux-mem) --format "[#[fg=:color]:spark#[default]] #[fg=:color]:percent#[default]")| [ #S ] '
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_my_theme_color_white,$tmux_my_theme_color_white,$tmux_my_theme_color_yellow"
 tmux_conf_theme_status_left_bg="default,default,default"

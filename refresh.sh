@@ -25,4 +25,4 @@ wait && vim -c "PlugClean" +qall
 wait && vim -c "PlugInstall" +qall
 
 echo "building YouCompleteMe ..."
-$(which python) $HOME/.vim/plugged/YouCompleteMe/install.py --clang-completer --ts-completer
+/usr/local/bin/python3 $HOME/.vim/plugged/YouCompleteMe/install.py --all

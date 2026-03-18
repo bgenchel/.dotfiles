@@ -11,18 +11,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 if [[ $(uname) = "Darwin" ]]; # Darwin is the kernal that Mac's commonly use
 then 
-    # if [[ -a $HOME/anaconda ]]; then
-    #     . $HOME/anaconda/etc/profile.d/conda.sh
-    # elif [[ -a $HOME/anaconda3 ]]; then
-    #     . $HOME/anaconda3/etc/profile.d/conda.sh
-    # fi
-    # conda activate
-
     export PATH=/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:$PATH
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-    alias python="/usr/local/bin/python3";
-    alias pip="/usr/local/bin/pip3";
     alias vim="/usr/local/bin/vim";
 
     # The next line updates PATH for the Google Cloud SDK.
@@ -91,7 +82,6 @@ function cleanVIM() {
   echo "Cleaning ~/.vimundo/"
   rm -Rf ~/.vimundo/*
   echo "All done!"
-
 }
 
 # For PowerLevel10K Theme - To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -100,13 +90,52 @@ function cleanVIM() {
 # Add custom scripts to path
 export PATH=$PATH:$HOME/.bin
 
-# Python Path
-export PYTHONPATH=/usr/local/bin/python:$PYTHONPATH
-
 # zshrc extra options
 source $HOME/.zshrc.extras
 
-# pyenv 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+## uv
+# activate your project's .venv automatically when you cd in
+function chpwd() {
+  if [[ -d .venv ]]; then
+    source .venv/bin/activate
+  else
+    # deactivate if you leave a project folder
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+       deactivate
+    fi
+  fi
+}
+[[ -d .venv ]] && source .venv/bin/activate
+
+# uv ergonomics
+export UV_GLOBAL_VENV="$HOME/.venv"
+
+_auto_activate_uv_venv() {
+    # walk up directory tree looking for .venv
+    local dir="$PWD"
+
+    while [[ "$dir" != "/" ]]; do
+        if [[ -d "$dir/.venv" ]]; then
+            if [[ "$VIRTUAL_ENV" != "$dir/.venv" ]]; then
+                source "$dir/.venv/bin/activate"
+            fi
+            return
+        fi
+        dir="$(dirname "$dir")"
+    done
+
+    # no project venv found → use global
+    if [[ "$VIRTUAL_ENV" != "$UV_GLOBAL_VENV" ]]; then
+        if [[ -n "$VIRTUAL_ENV" ]]; then
+            deactivate 2>/dev/null
+        fi
+        source "$UV_GLOBAL_VENV/bin/activate"
+    fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _auto_activate_uv_venv
+
+# run once at shell start
+_auto_activate_uv_venv
+

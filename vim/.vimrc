@@ -3,6 +3,7 @@
 filetype off
 
 set encoding=utf-8
+set nocompatible
 
 " Setup FZF
 set rtp+=~/.fzf
@@ -12,12 +13,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
-" Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/a.vim'
-Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'preservim/nerdtree'
+Plug 'dense-analysis/ale'
+Plug 'preservim/nerdcommenter'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
@@ -27,18 +27,18 @@ Plug 'wincent/terminus'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'ivalkeen/vim-ctrlp-tjump'
-Plug 'altercation/vim-colors-solarized'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-commentary'
-Plug 'highwaynoise/chuck.vim'
-Plug 'vim-latex/vim-latex'
+Plug 'highwaynoise/chuck.vim'  " this is for realtime sound synthesis
 Plug 'sheerun/vim-polyglot'
-Plug 'quramy/tsuquyomi'
+Plug 'quramy/tsuquyomi' " this is a completion plugin for typescript
 Plug 'quramy/vim-js-pretty-template'
-Plug 'leafgarland/typescript-vim'
+Plug 'vim-latex/vim-latex'
+" Plug 'leafgarland/typescript-vim'
 " Plug 'vim-python/python-syntax'
 " Plug 'munshkr/vim-tidal'
-" Plug 'junegunn/fzf.vim', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 filetype indent plugin on
@@ -47,11 +47,8 @@ let g:python_highlight_all = 1
 
 set background=dark
 set t_Co=256  " 256 term coloring
-"let g:solarized_termtrans = 1
-"let g:solarized_termcolors=16
-"let g:solarized_visibility='high'
-"let g:solarized_contrast = 'high'
 
+set termguicolors
 colorscheme molokai
 
 " Display.
@@ -228,55 +225,6 @@ map gp :bp<cr>
 map gd :bd<cr> 
 
 " ******************** PLUGINS ********************
-"" ========== SYNTASTIC ==========
-map sr :SyntasticCheck<CR>
-noremap sr :SyntasticCheck<CR>
-
-map se :Errors<CR>
-noremap se :Errors<CR>
-
-map sc :lclose<CR>
-noremap sc :lclose<CR>
-
-map st :SyntasticToggleMode<CR>
-noremap st :SyntasticToggleMode<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" let g:syntastic_debug = 1
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_balloons = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-""" python
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
-let g:syntastic_python_flake8_args='--ignore=E501,E228,W391,W291,E226,E127,E128,W605,E401'
-let g:syntastic_python_pylint_post_args='--disable=
-    \missing-docstring,
-    \trailing-whitespace,
-    \too-many-arguments,
-    \line-too-long,
-    \wrong-import-order,
-    \invalid-name,
-    \too-few-public-methods,
-    \bad-continuation'
-""" java
-let java_highlight_functions = 1
-let java_highlight_all = 1
-" If you are trying this at runtime, you need to reload the syntax file
-set filetype=java
-
-" Some more highlights, in addition to those suggested by cmcginty
-highlight link javaScopeDecl Statement
-highlight link javaType Type
-highlight link javaDocTags PreProc
-""================================
 
 " ========== YouCompleteMe ==========
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/.ycm_extra_conf.py'
@@ -396,6 +344,7 @@ nmap mm gc<CR>
 nnoremap mm gc<CR>
 nmap cp gcap<CR>
 " ====================================
+
 " **************************************************
 
 " Configuration for ~/.vimrc:
@@ -414,10 +363,6 @@ augroup reload_vimrc
   autocmd!
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
-
-" Alex's FB specific stuff
-" Treat *.test files as sql to get better syntax highlighting
-"au BufReadPost *.test set syntax=sql
 
 " NerdCommenter alternate syntax for .test files - currently not working!
 let g:NERDCustomDelimiters = {
