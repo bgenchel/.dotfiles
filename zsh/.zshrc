@@ -87,26 +87,13 @@ function cleanVIM() {
 # For PowerLevel10K Theme - To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# Add custom scripts to path
-export PATH=$PATH:$HOME/.bin
+# Add .local and custom scripts to path
+export PATH=$PATH:$HOME/.bin:$HOME/.local/bin
 
 # zshrc extra options
 source $HOME/.zshrc.extras
 
 ## uv
-# activate your project's .venv automatically when you cd in
-function chpwd() {
-  if [[ -d .venv ]]; then
-    source .venv/bin/activate
-  else
-    # deactivate if you leave a project folder
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-       deactivate
-    fi
-  fi
-}
-[[ -d .venv ]] && source .venv/bin/activate
-
 # uv ergonomics
 export UV_GLOBAL_VENV="$HOME/.venv"
 
